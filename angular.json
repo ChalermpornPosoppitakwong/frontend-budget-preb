@@ -88,6 +88,18 @@
               "src/styles.css"
             ]
           }
+        },
+        "e2e": {
+          "builder": "@ngx-playwright/test:run",
+          "options": {
+            "config": "playwright/playwright.config.ts",
+            "devServerTarget": "serve"
+          },
+          "configurations": {
+            "ci": {
+              "forbidOnly": true
+            }
+          }
         }
       }
     }

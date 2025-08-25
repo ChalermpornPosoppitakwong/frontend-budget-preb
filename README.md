@@ -1,59 +1,98 @@
-# FrontendBudgetPreb
+# Frontend Budget PREB
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.5.
+Angular application for budget management built with modern tools and practices.
 
-## Development server
+## Tech Stack
 
-To start a local development server, run:
+- **Angular 20+** - Modern Angular framework with standalone components
+- **Bun** - Fast package manager and task runner
+- **TailwindCSS** - Utility-first CSS framework
+- **DaisyUI** - Component library for TailwindCSS
+- **Biome** - Fast linter and formatter
+- **Jest** - Testing framework with Angular preset
+- **Playwright** - End-to-end testing
+- **Husky** - Git hooks for code quality
+- **Standard Version** - Automated versioning and changelog
 
+## Development
+
+Start the development server:
 ```bash
-ng serve
+bun run start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The application will be available at `http://localhost:4200/` with hot reload.
 
-## Code scaffolding
+## Scripts
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### Development
 ```bash
-ng generate component component-name
+bun run start        # Start development server
+bun run watch        # Build and watch for changes
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+### Testing
 ```bash
-ng generate --help
+bun run test         # Run unit tests
+bun run test:watch   # Run tests in watch mode
+bun run test:coverage # Run tests with coverage report
+bun run e2e          # Run end-to-end tests
 ```
 
-## Building
-
-To build the project run:
-
+### Code Quality
 ```bash
-ng build
+bun run biome:check  # Check linting and formatting
+bun run typecheck    # Run TypeScript type checking
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+### Build
 ```bash
-ng test
+bun run build        # Build for production
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
+### Release
 ```bash
-ng e2e
+bun run release:dry  # Preview release changes
+bun run release      # Create automated release
+bun run release:patch # Create patch release (0.0.1 -> 0.0.2)
+bun run release:minor # Create minor release (0.0.1 -> 0.1.0)
+bun run release:major # Create major release (0.0.1 -> 1.0.0)
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Project Structure
 
-## Additional Resources
+```
+src/
+├── app/          # Application components and modules
+│   ├── app.ts    # Root component
+│   ├── app.config.ts # Application configuration
+│   └── app.routes.ts # Route definitions
+└── main.ts       # Application bootstrap
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Git Hooks
+
+This project uses Husky for automated code quality checks:
+
+- **Pre-commit**: Runs linting, type checking, and tests
+- **Pre-push**: Runs full test coverage and build
+
+## Conventional Commits
+
+This project follows [Conventional Commits](https://www.conventionalcommits.org/) for automated versioning:
+
+- `feat:` - New features
+- `fix:` - Bug fixes  
+- `docs:` - Documentation changes
+- `test:` - Test additions or changes
+- `chore:` - Maintenance tasks
+
+## Installation
+
+```bash
+bun install
+```
+
+## Package Manager
+
+This project uses **Bun** as the package manager. Always use `bun` commands instead of `npm` or `yarn`.

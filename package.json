@@ -11,7 +11,8 @@
 		"test:coverage": "jest --coverage",
 		"e2e": "ng e2e",
 		"biome:check": "biome check",
-		"typecheck": "tsc -b --pretty --verbose"
+		"typecheck": "tsc -b --pretty --verbose",
+		"prepare": "husky"
 	},
 	"prettier": {
 		"overrides": [
@@ -47,6 +48,7 @@
 		"@biomejs/biome": "^2.2.2",
 		"@types/jest": "^30.0.0",
 		"daisyui": "^5.0.50",
+		"husky": "^9.1.7",
 		"jest": "^30.0.5",
 		"jest-preset-angular": "^15.0.0",
 		"ts-node": "^10.9.2",

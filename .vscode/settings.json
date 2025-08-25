@@ -12,5 +12,6 @@
 	},
 	"[jsonc]": {
 		"editor.defaultFormatter": "vscode.json-language-features"
-	}
+	},
+	"css.lint.unknownAtRules": "ignore"
 }

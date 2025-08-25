@@ -60,7 +60,7 @@ This is a single Angular application with the following structure:
 - **Bun**: Fast package manager and task runner
 - **TailwindCSS**: Utility-first CSS framework with DaisyUI components
 - **Playwright**: E2E testing framework
-- **Semantic Release**: Automated versioning and changelog generation
+- **Standard Version**: Automated versioning and changelog generation using Conventional Commits
 
 ## Commit conventions
 
@@ -116,4 +116,9 @@ bun run release:dry
 
 # Create semantic release
 bun run release
+
+# Create specific version releases
+bun run release:patch  # 0.0.1 -> 0.0.2
+bun run release:minor  # 0.0.1 -> 0.1.0
+bun run release:major  # 0.0.1 -> 1.0.0
 ```

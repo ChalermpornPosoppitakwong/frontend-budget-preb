@@ -13,8 +13,11 @@
 		"biome:check": "biome check",
 		"typecheck": "tsc -b --pretty --verbose",
 		"prepare": "husky",
-		"release": "semantic-release",
-		"release:dry": "semantic-release --dry-run"
+		"release": "standard-version",
+		"release:dry": "standard-version --dry-run",
+		"release:patch": "standard-version --release-as patch",
+		"release:minor": "standard-version --release-as minor",
+		"release:major": "standard-version --release-as major"
 	},
 	"prettier": {
 		"overrides": [
@@ -48,14 +51,12 @@
 		"@angular/cli": "^20.0.5",
 		"@angular/compiler-cli": "^20.0.0",
 		"@biomejs/biome": "^2.2.2",
-		"@semantic-release/changelog": "^6.0.3",
-		"@semantic-release/git": "^10.0.1",
 		"@types/jest": "^30.0.0",
 		"daisyui": "^5.0.50",
 		"husky": "^9.1.7",
 		"jest": "^30.0.5",
 		"jest-preset-angular": "^15.0.0",
-		"semantic-release": "^24.2.7",
+		"standard-version": "^9.5.0",
 		"ts-node": "^10.9.2",
 		"typescript": "~5.8.2"
 	}

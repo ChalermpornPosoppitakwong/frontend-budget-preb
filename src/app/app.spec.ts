@@ -22,4 +22,17 @@ describe('App', () => {
 			'Hello, frontend-budget-preb',
 		);
 	});
+
+	it('should have title property', () => {
+		const fixture = TestBed.createComponent(App);
+		const app = fixture.componentInstance;
+		expect(app['title']).toBe('frontend-budget-preb');
+	});
+
+	it('should have protected title property', () => {
+		const fixture = TestBed.createComponent(App);
+		const app = fixture.componentInstance;
+		expect(typeof app['title']).toBe('string');
+		expect(app['title']).toBeDefined();
+	});
 });

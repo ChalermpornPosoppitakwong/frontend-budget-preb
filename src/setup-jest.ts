@@ -5,40 +5,39 @@ setupZoneTestEnv();
 // Global test setup
 Object.defineProperty(window, 'CSS', { value: null });
 Object.defineProperty(window, 'getComputedStyle', {
-  value: () => {
-    return {
-      display: 'none',
-      appearance: ['-webkit-appearance']
-    };
-  }
+	value: () => {
+		return {
+			display: 'none',
+			appearance: ['-webkit-appearance'],
+		};
+	},
 });
 
 Object.defineProperty(document, 'doctype', {
-  value: '<!DOCTYPE html>'
+	value: '<!DOCTYPE html>',
 });
 
 Object.defineProperty(document.body.style, 'transform', {
-  value: () => {
-    return {
-      enumerable: true,
-      configurable: true
-    };
-  }
+	value: () => {
+		return {
+			enumerable: true,
+			configurable: true,
+		};
+	},
 });
 
 // Mock for IntersectionObserver
+// biome-ignore lint/suspicious/noExplicitAny: globalThis type assertion needed for test environment
 (globalThis as any).IntersectionObserver = class IntersectionObserver {
-  constructor() {}
-  
-  observe() {
-    return null;
-  }
-  
-  disconnect() {
-    return null;
-  }
-  
-  unobserve() {
-    return null;
-  }
+	observe() {
+		return null;
+	}
+
+	disconnect() {
+		return null;
+	}
+
+	unobserve() {
+		return null;
+	}
 };

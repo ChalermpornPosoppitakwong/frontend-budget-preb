@@ -1,10 +1,25 @@
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { provideTransloco } from '@jsverse/transloco';
+import { provideTranslocoLocale } from '@jsverse/transloco-locale';
 import { App } from './app';
+import { translocoConfigFactory } from './i18n/transloco.config';
+import { TranslocoHttpLoader } from './i18n/transloco-http-loader';
 
 describe('App', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [App],
+			providers: [
+				provideHttpClientTesting(),
+				provideRouter([]),
+				provideTransloco({
+					config: translocoConfigFactory(),
+					loader: TranslocoHttpLoader,
+				}),
+				provideTranslocoLocale(),
+			],
 		}).compileComponents();
 	});
 
@@ -14,25 +29,15 @@ describe('App', () => {
 		expect(app).toBeTruthy();
 	});
 
-	it('should render title', () => {
-		const fixture = TestBed.createComponent(App);
-		fixture.detectChanges();
-		const compiled = fixture.nativeElement as HTMLElement;
-		expect(compiled.querySelector('h1')?.textContent).toContain(
-			'Hello, frontend-budget-preb',
-		);
-	});
-
-	it('should have title property', () => {
+	it('should have language service', () => {
 		const fixture = TestBed.createComponent(App);
 		const app = fixture.componentInstance;
-		expect(app['title']).toBe('frontend-budget-preb');
+		expect(app.language).toBeDefined();
 	});
 
-	it('should have protected title property', () => {
+	it('should have activeLang getter', () => {
 		const fixture = TestBed.createComponent(App);
 		const app = fixture.componentInstance;
-		expect(typeof app['title']).toBe('string');
-		expect(app['title']).toBeDefined();
+		expect(app.activeLang).toBeDefined();
 	});
 });

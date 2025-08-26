@@ -1,0 +1,18 @@
+{
+	"app": {
+		"title": "Welcome",
+		"description": "Runtime i18n with Transloco",
+		"changeLanguage": "Change language",
+		"currentLanguage": "Current language: {{lang}}"
+	},
+	"home": {
+		"hello": "Hello {{name}}",
+		"today": "Today is {{date}}",
+		"balance": "Your balance is {{amount}}"
+	},
+	"admin": {
+		"title": "Admin Panel",
+		"users": "Users",
+		"settings": "Settings"
+	}
+}

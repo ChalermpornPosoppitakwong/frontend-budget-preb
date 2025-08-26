@@ -1,0 +1,13 @@
+<div class="p-6 bg-white rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold mb-4">{{ 'admin.title' | transloco }}</h2>
+  <ul class="list-disc pl-6">
+    <li class="mb-2">{{ 'admin.users' | transloco }}</li>
+    <li class="mb-2">{{ 'admin.settings' | transloco }}</li>
+  </ul>
+  <div class="mb-6 p-4 bg-gray-100 rounded">
+    <h3 class="text-lg font-semibold mb-2">Locale Examples:</h3>
+    <p class="mb-2">{{ 0.678 | translocoPercent }}</p>
+    <p class="mb-2">{{ 1999.99 | translocoCurrency:'symbol':{}:'THB' }}</p>
+    <p class="mb-2">{{ 1999.99 | translocoCurrency:'symbol':{}:'USD' }}</p>
+  </div>
+</div>

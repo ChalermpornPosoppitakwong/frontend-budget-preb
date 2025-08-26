@@ -9,7 +9,8 @@ describe('routes', () => {
 		expect(Array.isArray(routes)).toBe(true);
 	});
 
-	it('should be initially empty', () => {
-		expect(routes.length).toBe(0);
+	it('should have initial routes configured', () => {
+		expect(routes.length).toBeGreaterThan(0);
+		expect(routes[0].path).toBe('');
 	});
 });

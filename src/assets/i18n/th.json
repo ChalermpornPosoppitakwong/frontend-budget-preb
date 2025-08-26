@@ -1,0 +1,18 @@
+{
+	"app": {
+		"title": "ยินดีต้อนรับ",
+		"description": "แปลภาษาแบบ Runtime ด้วย Transloco",
+		"changeLanguage": "เปลี่ยนภาษา",
+		"currentLanguage": "ภาษาปัจจุบัน: {{lang}}"
+	},
+	"home": {
+		"hello": "สวัสดี {{name}}",
+		"today": "วันนี้คือ {{date}}",
+		"balance": "ยอดเงินของคุณคือ {{amount}}"
+	},
+	"admin": {
+		"title": "แผงผู้ดูแล",
+		"users": "ผู้ใช้",
+		"settings": "การตั้งค่า"
+	}
+}

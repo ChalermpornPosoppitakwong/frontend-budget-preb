@@ -15,6 +15,9 @@ const config: Config = {
 	},
 	transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
 	moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
+	moduleNameMapper: {
+		'^@environments/(.*)$': '<rootDir>/src/environments/$1',
+	},
 	collectCoverage: true,
 	coverageDirectory: 'coverage',
 	coverageReporters: ['html', 'text-summary', 'lcov'],

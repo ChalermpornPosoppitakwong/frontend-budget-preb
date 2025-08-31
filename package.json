@@ -11,6 +11,12 @@
 		"test:coverage": "jest --coverage",
 		"e2e": "ng e2e",
 		"biome:check": "biome check",
+		"lint": "biome lint ./src",
+		"lint:fix": "biome lint --apply ./src",
+		"format": "biome format ./src",
+		"format:fix": "biome format --write ./src",
+		"check": "biome check ./src",
+		"check:fix": "biome check --apply ./src",
 		"typecheck": "tsc -b --pretty --verbose",
 		"prepare": "husky",
 		"release": "standard-version",
@@ -54,12 +60,12 @@
 		"@angular/compiler-cli": "^20.0.0",
 		"@biomejs/biome": "^2.2.2",
 		"@types/jest": "^30.0.0",
-		"daisyui": "^5.0.50",
+		"daisyui": "^5.0.51",
 		"husky": "^9.1.7",
 		"jest": "^30.0.5",
 		"jest-preset-angular": "^15.0.0",
 		"standard-version": "^9.5.0",
 		"ts-node": "^10.9.2",
-		"typescript": "~5.8.2"
+		"typescript": "5.9.2"
 	}
 }

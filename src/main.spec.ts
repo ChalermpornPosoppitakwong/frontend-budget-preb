@@ -12,9 +12,9 @@ jest.mock('@angular/platform-browser', () => ({
 }));
 
 // Mock console.error
-const mockConsoleError = jest
-	.spyOn(console, 'error')
-	.mockImplementation(() => {});
+const mockConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {
+	// Intentionally empty - suppressing console.error for tests
+});
 
 describe('main.ts', () => {
 	beforeEach(() => {

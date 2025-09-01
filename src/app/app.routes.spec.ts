@@ -13,4 +13,16 @@ describe('routes', () => {
 		expect(routes.length).toBeGreaterThan(0);
 		expect(routes[0].path).toBe('');
 	});
+
+	it('should have admin route with lazy loading', async () => {
+		const adminRoute = routes.find((route) => route.path === 'admin');
+		expect(adminRoute).toBeDefined();
+		expect(adminRoute?.loadComponent).toBeDefined();
+
+		// Test lazy loading function
+		if (adminRoute?.loadComponent) {
+			const component = await adminRoute.loadComponent();
+			expect(component).toBeDefined();
+		}
+	});
 });

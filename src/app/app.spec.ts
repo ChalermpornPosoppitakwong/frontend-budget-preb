@@ -40,4 +40,14 @@ describe('App', () => {
 		const app = fixture.componentInstance;
 		expect(app.activeLang).toBeDefined();
 	});
+
+	it('should initialize language service on ngOnInit', () => {
+		const fixture = TestBed.createComponent(App);
+		const app = fixture.componentInstance;
+		const initSpy = jest.spyOn(app.language, 'init');
+
+		app.ngOnInit();
+
+		expect(initSpy).toHaveBeenCalled();
+	});
 });

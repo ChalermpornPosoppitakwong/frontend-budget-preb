@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/ChalermpornPosoppitakwong/frontend-budget-preb/compare/v0.0.2...v0.0.3) (2025-09-01)
+
+
+### Features
+
+* add moduleNameMapper for environment paths and update TypeScript configuration for environment aliases ([8874e3a](https://github.com/ChalermpornPosoppitakwong/frontend-budget-preb/commit/8874e3af53189e6b5c98f59f49a05458b0a47306))
+* **i18n:** implement runtime internationalization with Transloco ([8724434](https://github.com/ChalermpornPosoppitakwong/frontend-budget-preb/commit/87244345dbc39515b11caad51bfffa96b087bd61))
+
+
+### Bug Fixes
+
+* update biome configuration and dependencies; add linting and formatting scripts ([40cb615](https://github.com/ChalermpornPosoppitakwong/frontend-budget-preb/commit/40cb6152fb00167359ffdd1970d469188863a280))
+
 ### [0.0.2](https://github.com/ChalermpornPosoppitakwong/frontend-budget-preb/compare/v0.0.1...v0.0.2) (2025-08-25)
 
 ### 0.0.1 (2025-08-25)

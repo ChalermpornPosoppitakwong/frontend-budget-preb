@@ -1,0 +1,110 @@
+<table class="table w-full">
+  <thead>
+    <tr class="h-12 text-blue-100 cursor-pointer text-center">
+      @if(selectionType) {
+      <th class="bg-blue-400 border border-blue-300 py-1 px-3 w-12">
+        @if(selectionType === 'checkbox') {
+        <app-checkbox #chkAll [(ngModel)]="allSelectedValue" [indeterminate]="someSelectedButNotAll()"
+          (checkedChange)="toggleAll($event)" class="w-3.5 h-3.5"></app-checkbox>
+        }
+      </th>
+      }
+
+      @for (header of headers; track header) {
+      <th class="bg-blue-400 border border-blue-300 py-1 px-3" [attr.width]="header?.width"
+        (click)="header.sortable && onSort(header)">
+        {{ header?.title }}
+
+        @if(header.sortable && sortKey === header.key) {
+        <span>
+          {{ sortDirection === 'asc' ? '▲' : '▼' }}
+        </span>
+        }
+      </th>
+      }
+    </tr>
+  </thead>
+
+  @if(!loading){
+  <tbody>
+    @for (row of data; track row) {
+    <tr class="h-[40px] hover:bg-blue-100 cursor-pointer text-gray-700">
+      @if(selectionType) {
+      <td class="border border-blue-300 px-3 py-0 text-center">
+        @if(selectionType === 'checkbox') {
+        <app-checkbox [(ngModel)]="row.selected" (checkedChange)="onSelectionChange(row)"
+          class="w-3.5 h-3.5"></app-checkbox>
+        }
+        @if(selectionType === 'radio') {
+        <app-radio [options]="[{ label: '', value: row }]" name="rowSelection" [(ngModel)]="selectedRow"
+          (ngModelChange)="onSelectionChange(row)"></app-radio>
+        }
+      </td>
+      }
+
+      @for(header of headers; track header) {
+      <td class="border border-blue-300 px-3 py-0 text-center" [ngClass]="header?.align ? 'text-' + header.align : ''">
+        @if(header.slot) {
+        <ng-container [ngTemplateOutlet]="header.slot" [ngTemplateOutletContext]="{ $implicit: row }"></ng-container>
+        } @else {
+        <span>{{ header?.key ? row[header.key ?? ''] : '' }}</span>
+        }
+      </td>
+      }
+    </tr>
+    }
+  </tbody>
+  } @else {
+  <!-- Skeleton -->
+  <tbody>
+    @for (item of skeletonRows; track item) {
+    <tr class="h-[40px] animate-pulse">
+      @if(selectionType) {
+      <td class="border border-blue-300 px-3 py-0 text-center">
+        <div class="bg-gray-200 rounded w-3.5 h-3.5 mx-auto"></div>
+      </td>
+      }
+
+      @for (header of headers; track header) {
+      <td class="border border-blue-300 px-3 py-0 text-center" [ngClass]="header?.align ? 'text-' + header.align : ''">
+        <div class="bg-gray-200 rounded h-4 w-3/4 mx-auto"></div>
+      </td>
+      }
+    </tr>
+    }
+  </tbody>
+  }
+</table>
+
+<!-- Pagination -->
+@if(!loading && totalItems) {
+<div class="py-4 flex flex-col md:flex-row justify-between items-center gap-2">
+  <p class="text-gray-700 text-sm font-normal">รายการทั้งหมด {{ totalItems }} รายการ</p>
+
+  <div class="flex justify-center items-center">
+    <div class="join gap-2">
+      <button class="join-item btn btn-sm" (click)="goToFirst()">&lt;&lt;</button>
+      <button class="join-item btn btn-sm" (click)="goToPrev()">&lt;</button>
+      <button class="join-item btn btn-sm">{{ currentPage }}</button>
+      <button class="join-item btn btn-sm" (click)="goToNext()">&gt;</button>
+      <button class="join-item btn btn-sm" (click)="goToLast()">&gt;&gt;</button>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <p class="text-gray-700 text-sm font-normal">แสดง</p>
+    <app-select [options]="pageSizeOptions" [(ngModel)]="pageSize"
+      (ngModelChange)="onPageSizeChange($event)"></app-select>
+  </div>
+</div>
+}
+
+@if(!loading && (!totalItems || data.length === 0)) {
+<!-- Empty state -->
+<div class="h-80 flex flex-col justify-center items-center text-gray-400">
+  <div class="flex items-center gap-2">
+    <app-icon name="circle" size="24"></app-icon>
+    <span>ยังไม่มีรายการ</span>
+  </div>
+</div>
+}

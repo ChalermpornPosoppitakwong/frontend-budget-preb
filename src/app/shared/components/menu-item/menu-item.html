@@ -1,0 +1,42 @@
+<li [ngClass]="{ 'shadow-sm': isParent }">
+    @if (menu?.submenu?.length) {
+    <details>
+        <summary
+            class="hover:bg-blue-100 active:!bg-blue-100 focus-visible:!bg-blue-100 text-gray-700 hover:text-blue-400 px-4 py-3.5 cursor-pointer">
+            <div class="flex items-center gap-2">
+                @if (menu?.icon) {
+                <app-icon [name]="menu.icon" size="25" [ariaLabel]="menu.title"></app-icon>
+                }
+                <span>{{ menu.title }}</span>
+            </div>
+        </summary>
+
+        <ul class="ml-4 pl-4 py-2 relative">
+            <li *ngFor="let child of menu.submenu; let last = last" class="relative pl-4
+             before:content-[''] before:absolute before:left-0 before:top-1/2 before:w-4
+             before:border-t before:border-dashed before:border-blue-300
+             after:content-[''] after:absolute after:left-0 after:top-0 after:bottom-0
+             after:border-l after:border-dashed after:border-blue-300" [ngClass]="{ 'after:bottom-1': last }">
+
+                <!-- เรียก component ซ้อน -->
+                <app-menu-item
+                    class="hover:bg-transparent active:!bg-transparent focus-visible:!bg-transparent pl-1 text-gray-700 hover:text-blue-400"
+                    [menu]="child"></app-menu-item>
+            </li>
+        </ul>
+    </details>
+    }
+    @else {
+    <a [routerLink]="menu.path" class="hover:bg-transparent active:!bg-transparent pb-2 px-1 cursor-pointer" [ngClass]="{
+       'bg-blue-100 text-blue-400': isActive(menu.path),
+       'hover:!bg-blue-100 hover:text-blue-400 !px-4 !py-3.5': isParent
+     }">
+        <div class="flex items-center gap-2">
+            @if (menu?.icon) {
+            <app-icon [name]="menu.icon" size="25" [ariaLabel]="menu.title"></app-icon>
+            }
+            <span class="text-sm">{{ menu.title }}</span>
+        </div>
+    </a>
+    }
+</li>

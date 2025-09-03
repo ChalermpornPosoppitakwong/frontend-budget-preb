@@ -1,0 +1,117 @@
+<div class="flex flex-col gap-4">
+    <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-4">
+            <div class="card bg-base-100 card-sm shadow-sm">
+                <div class="card-body">
+                    <p class="card-title text-lg font-semibold border-b border-gray-200 text-gray-700 py-2">
+                        <app-icon name="report-menu" size="30" ariaLabel="report-menu"></app-icon>
+                        ข่าวประชาสัมพันธ์
+                    </p>
+
+                    <ul>
+                        <li *ngFor="let announcement of announcements" class="py-2">
+                            <div class="flex items-center gap-2">
+                                <span [class]="announcement.color" class="px-2 rounded-sm">{{ announcement.topic
+                                    }}</span>
+                                <a class="hover:underline" [href]="announcement.link"><span
+                                        class="text-gray-700 text-sm font-medium"></span>{{
+                                    announcement.title
+                                    }}</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-4">
+            <div class="card bg-base-100 card-sm shadow-sm">
+                <div class="card-body">
+                    <p class="card-title text-lg font-semibold border-b border-gray-200 py-2">
+                        <app-icon name="report-menu" size="30" ariaLabel="report-menu"></app-icon>
+                        ข่าวประชาสัมพันธ์
+                    </p>
+
+                    <ul>
+                        <li *ngFor="let announcement of announcements" class="py-2">
+                            <div class="flex items-center gap-2">
+                                <span [class]="announcement.color" class="px-2 rounded-sm">{{ announcement.topic
+                                    }}</span>
+                                <a class="hover:underline" [href]="announcement.link"><span
+                                        class="text-gray-700 text-sm font-medium"></span>{{
+                                    announcement.title
+                                    }}</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-4">
+            <div class="card bg-base-100 card-sm shadow-sm">
+                <div class="card-body">
+                    <p class="card-title text-lg font-semibold border-b border-gray-200 py-2">
+                        <app-icon name="report-menu" size="30" ariaLabel="report-menu"></app-icon>
+                        ข่าวประชาสัมพันธ์
+                    </p>
+
+                    <ul>
+                        <li *ngFor="let announcement of announcements" class="py-2">
+                            <div class="flex items-center gap-2">
+                                <span [class]="announcement.color" class="px-2 rounded-sm">{{ announcement.topic
+                                    }}</span>
+                                <a class="hover:underline" [href]="announcement.link"><span
+                                        class="text-gray-700 text-sm font-medium"></span>{{
+                                    announcement.title
+                                    }}</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 gap-4">
+        <div class="card bg-base-100 card-sm shadow-sm">
+            <div class="card-body">
+                <p class="card-title text-lg font-semibold border-b border-gray-200 text-gray-700 py-2">
+                    <app-icon name="speaker-phone" size="30" ariaLabel="speaker-phone"></app-icon>
+                    หัวข้อ
+                </p>
+
+                <ul>
+                    <li *ngFor="let announcement of announcements" class="py-2">
+                        <div class="flex items-center gap-2">
+                            <span [class]="announcement.color" class="px-2 rounded-sm">{{ announcement.topic }}</span>
+                            <a class="hover:underline" [href]="announcement.link"><span
+                                    class="text-gray-700 text-sm font-medium"></span>{{
+                                announcement.title
+                                }}</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 gap-4">
+        <div class="card bg-base-100 card-sm shadow-sm">
+            <div class="card-body">
+                <p class="card-title text-lg font-semibold border-b border-gray-200 text-gray-700 py-2">
+                    <app-icon name="speaker-phone" size="30" ariaLabel="speaker-phone"></app-icon>
+                    หัวข้อ
+                </p>
+
+                <ul>
+                    <li *ngFor="let announcement of announcements" class="py-2">
+                        <div class="flex items-center gap-2">
+                            <span [class]="announcement.color" class="px-2 rounded-sm">{{ announcement.topic }}</span>
+                            <a class="hover:underline" [href]="announcement.link"><span
+                                    class="text-gray-700 text-sm font-medium"></span>{{
+                                announcement.title
+                                }}</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

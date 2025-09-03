@@ -5,11 +5,26 @@
 	"compilerOptions": {
 		"baseUrl": "./",
 		"paths": {
-			"@environments/*": ["src/environments/*"]
+			"@environments/*": [
+				"src/environments/*"
+			],
+			"@shared/*": [
+				"src/app/shared/*"
+			],
+			"@modules/*": [
+				"src/app/modules/*"
+			],
+			"@core/*": [
+				"src/app/core/*"
+			],
 		},
 		"outDir": "./out-tsc/app",
 		"types": []
 	},
-	"include": ["src/**/*.ts"],
-	"exclude": ["src/**/*.spec.ts"]
+	"include": [
+		"src/**/*.ts"
+	],
+	"exclude": [
+		"src/**/*.spec.ts"
+	]
 }

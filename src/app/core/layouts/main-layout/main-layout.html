@@ -1,0 +1,203 @@
+<div class="min-h-screen flex flex-col md:flex-row bg-gray-100">
+    <div [ngClass]="isSidebarCollapsed ? 'w-[60px]' : 'w-[300px]'"
+        class="transition-all duration-300 shadow-md bg-white overflow-visible hidden lg:block">
+        <div class="sticky top-0 z-50 h-[68px] bg-[#00A6E6]">
+            <div class="flex items-center justify-center h-full">
+                <img [src]="isSidebarCollapsed ? 'assets/images/ktb_logo_crop.png' : 'assets/images/ktb_logo_1.png'"
+                    alt="ktb_logo" class="h-[55px] mx-auto" />
+
+                @if(!isSidebarCollapsed) {
+                <button class="hidden md:block z-50 p-1 cursor-pointer" (click)="toggleSidebar()">
+                    <app-icon name="left-arrow" size="25" class="text-blue-100" ariaLabel="left-arrow"></app-icon>
+                </button>
+                }
+            </div>
+        </div>
+
+        <div class="sticky top-[68px] z-40 bg-blue-700 h-10 flex items-center justify-center gap-2"
+            [ngClass]="isSidebarCollapsed ? 'bg-white': ''">
+            @if(!isSidebarCollapsed) {
+            <app-icon [name]="menus.icon" size="25" class="text-white" [ariaLabel]="menus.title"></app-icon>
+            <span class="text-white text-sm font-semibold">{{menus.title}}</span>
+            }
+            @else {
+            <button class="hidden md:block z-50 p-1 cursor-pointer" (click)="toggleSidebar()">
+                <app-icon name="right-arrow" size="25" class="text-blue-100" ariaLabel="right-arrow"
+                    [ngClass]="isSidebarCollapsed ? 'text-gray-700': ''"></app-icon>
+            </button>
+            }
+        </div>
+
+        @if(!isSidebarCollapsed) {
+        <ul class="menu menu-md rounded-box w-full p-0">
+            <app-menu-item *ngFor="let menu of menus.submenu" [menu]="menu" [isParent]="true">
+            </app-menu-item>
+        </ul>
+        }
+        @else {
+        <div class="flex flex-col items-center sidebar-menu">
+            <ul class="menu p-0 w-full">
+                <li *ngFor="let menu of menus.submenu" class="relative group w-full"
+                    [ngClass]="isActive(menu?.path) ? 'bg-blue-100 text-blue-400' : ''">
+                    <!-- Parent menu -->
+                    <button
+                        class="w-full h-12 flex items-center justify-center gap-2 px-2 hover:bg-blue-100 active:!bg-blue-100 hover:text-blue-400"
+                        (click)="toggleMenu(menu)">
+                        <app-icon [name]="menu.icon ?? menus?.icon" size="25" [ariaLabel]="menu.title"></app-icon>
+                    </button>
+                    @if(isSidebarCollapsed && !openedMenu) {
+                    <!-- Tooltip สำหรับ collapsed sidebar -->
+                    <div
+                        class="absolute left-full top-1/2 transform -translate-y-1/2 ml-2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50">
+                        {{ menu.title }}
+                    </div>
+                    }
+
+                    @if(menu?.submenu &&openedMenu === menu) {
+                    <!-- Submenu แสดงใต้เมนู -->
+                    <ul class="absolute left-0 top-full p-2 min-w-64 bg-white shadow rounded-md z-50">
+                        <li *ngFor="let child of menu.submenu; let last = last" class="relative pl-4 
+                 before:content-[''] before:absolute before:left-0 before:top-1/2 before:w-4
+                 before:border-t before:border-dashed before:border-blue-300
+                 after:content-[''] after:absolute after:left-0 after:top-0 after:bottom-0
+                 after:border-l after:border-dashed after:border-blue-300 hover:text-blue-400"
+                            [ngClass]="{ 'after:bottom-1': last }">
+                            <span class="text-sm py-2 hover:!bg-transparent">{{ child.title }}</span>
+                        </li>
+                    </ul>
+                    }
+                </li>
+            </ul>
+        </div>
+        }
+    </div>
+    <div class="flex-1">
+        <div
+            class="sticky top-0 z-50 flex px-2 lg:px-6 items-center bg-gradient-to-r from-[#00A6E6] to-[#007BAA] h-[68px]">
+            <div class="flex w-64 justify-between items-center">
+                <div class="pl-2 lg:hidden drawer-start">
+                    <input id="drawer-menu" type="checkbox" class="drawer-toggle" />
+                    <div class="">
+                        <!-- Page content here -->
+                        <label for="drawer-menu">
+                            <svg data-v-608ec4a3="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
+                                class="w-7 h-7 text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"></path>
+                            </svg>
+                        </label>
+                    </div>
+                    <div class="drawer-side">
+                        <label for="drawer-menu" aria-label="close sidebar" class="drawer-overlay"></label>
+                        <div class="bg-white text-base-content min-h-full w-80 py-8">
+                            <ul class="menu menu-md rounded-box w-full p-0">
+                                <app-menu-item *ngFor="let menu of menuItems" [menu]="menu" [isParent]="true">
+                                </app-menu-item>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-white text-2xl font-bold lg:pl-0 pl-2">Budget Prep. Tool</p>
+                </div>
+            </div>
+            <div class="flex-1 flex justify-end gap-4 items-center px-2">
+                <app-icon name="notification-bell" size="30" class="text-white"
+                    ariaLabel="notification-bell"></app-icon>
+                <!-- Profile trigger -->
+                <div class="dropdown dropdown-end">
+                    <app-button tabindex="0" iconLeft="toggle" [outline]="true">
+                        Administrator
+                    </app-button>
+
+                    <ul tabindex="0" class="dropdown-content top-[56px] menu p-2 shadow bg-base-100 w-52 text-gray-700">
+                        <li><a class="hover:!bg-blue-100 hover:text-blue-400 text-sm font-normal">Role 1</a></li>
+                        <li><a class="hover:!bg-blue-100 hover:text-blue-400 text-sm font-normal">Role 2</a></li>
+                        <li><a class="hover:!bg-blue-100 hover:text-blue-400 text-sm font-normal">Role 3</a></li>
+                    </ul>
+                </div>
+
+
+                <div class="drawer-end">
+                    <input id="drawer-profile" type="checkbox" class="drawer-toggle" />
+                    <div class="">
+                        <!-- Page content here -->
+                        <label for="drawer-profile" class="">
+                            <div class="dropdown dropdown-end cursor-pointer rounded-lg bg-white/20 p-2">
+                                <div class="flex items-center gap-2" tabindex="0">
+                                    <app-icon name="profile" size="35" class="text-white"
+                                        ariaLabel="profile"></app-icon>
+                                    <div class="hidden lg:block">
+                                        <p class="text-sm font-medium text-white">สมคิด พัฒนาอุตสาหกิจ</p>
+                                        <p class="text-xs font-medium text-blue-200">ฝ่ายวางแผนและงบประมาณ</p>
+                                    </div>
+                                    <app-icon name="chevron-down" size="20" class="text-white"
+                                        ariaLabel="chevron-down"></app-icon>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="drawer-side">
+                        <label for="drawer-profile" aria-label="close sidebar" class="drawer-overlay"></label>
+                        <div class="bg-white text-base-content min-h-full w-80 px-4 py-8">
+                            <div class="space-y-1">
+                                <p class="text-sm font-semibold text-[#1B273A]">ข้อมูลผู้ใช้</p>
+                                <p class="text-sm font-normal text-[#414D63]">(585039) สมคิด พัฒนาอุตสาหกิจ </p>
+                                <p class="text-sm font-normal text-[#414D63]">(999990) ฝ่ายวางแผนและงบประมาณ</p>
+                            </div>
+                            <div class="border-b border-[#E7EBEE] my-4"></div>
+
+                            <div class="flex flex-col gap-3">
+                                <!-- ปุ่มออกจากระบบ -->
+                                <app-button color="danger" iconLeft="logout">
+                                    ออกจากระบบ
+                                </app-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sticky top-[68px] z-40 h-10 bg-white shadow-md overflow-x-auto hidden lg:flex">
+            <ul class="flex items-center px-4 md:px-8 h-full w-max whitespace-nowrap">
+                <li *ngFor="let item of menuItems; let i = index"
+                    class="py-2 px-4 md:px-6 flex items-center gap-1 flex-shrink-0">
+                    <app-icon [name]="item.icon" size="20"
+                        [ngClass]="isActive(item.path) ? 'text-blue-400' : 'text-gray-700'"
+                        [ariaLabel]="item.title"></app-icon>
+                    <a class="text-sm font-medium truncate"
+                        [ngClass]="isActive(item.path) ? 'text-blue-400' : 'text-gray-700'" [routerLink]="item.path">
+                        {{ item.title }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="px-8 py-4">
+            <div class="breadcrumbs text-sm">
+                <ul>
+                    <li *ngFor="let menu of activeChain; let last = last" class="text-sm font-medium">
+                        @if(!last) {
+                        <a [href]="menu.path" class="text-[#558598]">
+                            {{ menu.title }}
+                        </a>
+                        }
+                        @else {
+                        <span class="hover:!no-underline text-blue-400">{{ menu.title }}</span>
+                        }
+                    </li>
+                </ul>
+            </div>
+
+            @if(activeChain.length) {
+            <p class="text-2xl font-semibold text-gray-700 pb-2">{{activeChain[activeChain.length - 1]?.title}}</p>
+            }
+
+            <div class="min-h-[calc(100vh-280px)] mb-14">
+                <router-outlet />
+            </div>
+        </div>
+    </div>
+</div>

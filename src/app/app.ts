@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
 import {
 	TranslocoCurrencyPipe,
@@ -11,12 +11,11 @@ import { LanguageService } from './i18n/language.service';
 @Component({
 	selector: 'app-root',
 	imports: [
-		TranslocoPipe,
-		TranslocoDatePipe,
-		TranslocoPercentPipe,
-		TranslocoCurrencyPipe,
+		// TranslocoPipe,
+		// TranslocoDatePipe,
+		// TranslocoPercentPipe,
+		// TranslocoCurrencyPipe,
 		RouterOutlet,
-		RouterLink,
 	],
 	templateUrl: './app.html',
 	styleUrl: './app.css',

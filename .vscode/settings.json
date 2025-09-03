@@ -16,5 +16,8 @@
 	"[html]": {
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
-	"css.lint.unknownAtRules": "ignore"
+	"css.lint.unknownAtRules": "ignore",
+	"[css]": {
+		"editor.defaultFormatter": "vscode.css-language-features"
+	}
 }

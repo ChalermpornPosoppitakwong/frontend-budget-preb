@@ -11,6 +11,7 @@ import { Radio } from './radio/radio';
 import { MenuItem } from './menu-item/menu-item';
 import { Row } from './row/row';
 import { Col } from './col/col';
+import { Tree } from './tree/tree.component';
 
 @NgModule({
   declarations: [],
@@ -26,8 +27,9 @@ import { Col } from './col/col';
     Radio,
     MenuItem,
     Row,
-    Col
+    Col,
+    Tree
   ],
-  exports: [Button, Icon, Table, Select, InputComponent, Textarea, Checkbox, Radio, MenuItem, Row, Col]
+  exports: [Button, Icon, Table, Select, InputComponent, Textarea, Checkbox, Radio, MenuItem, Row, Col, Tree]
 })
 export class ComponentsModule { }

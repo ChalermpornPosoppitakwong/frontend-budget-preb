@@ -50,22 +50,33 @@
                     <app-checkbox [label]="'ทั้งหมด'"></app-checkbox>
                 </li>
                 <li *ngFor="let menu of menus">
-                    <app-checkbox [label]="menu.name"></app-checkbox>
+                    <app-checkbox [label]="menu.label"></app-checkbox>
                 </li>
             </ul>
         </div>
     </div>
 
     <div class="grid grid-cols-1 pt-2">
-        <ul class="text-gray-700">
-            <li *ngFor="let menu of menus" class="flex gap-2 items-center border-b border-gray-200 py-2">
-                <app-icon name="chevron-down" size="20" class="text-gray-700" ariaLabel="chevron-down"></app-icon>
-                <div class="flex flex-col ">
-                    <app-checkbox [label]="menu.name"></app-checkbox>
-                    <p class="text-xs font-normal text-gray-500">menu id: {{ menu.id }}</p>
+        <app-tree [data]="menus" [treeNodeTpl]="treeNode"></app-tree>
+        <ng-template #treeNode let-node let-parent="parent" let-toggle="toggle">
+            <div class="w-full">
+                <div class="flex flex-col items-start cursor-pointer pb-4"
+                    [ngClass]="parent ? 'border-b border-[#E7EBEE]' : ''" (click)="toggle(node)">
+                    <span class="text-gray-700 text-sm font-semibold">{{ node.label }}</span>
+                    <p class="text-xs font-normal text-gray-500">menu id: {{ node.id }}</p>
                 </div>
-            </li>
-        </ul>
+                <div *ngIf="parent" class="flex flex-col items-start p-2 bg-gray-100">
+                    <p class="text-sm font-medium text-gray-500">สิทธ์การทำงาน</p>
+
+                    <div class="flex items-center gap-4 mt-2">
+                        <app-checkbox label="ทั้งหมด"></app-checkbox>
+                        <app-checkbox label="เพิ่มข้อมูล"></app-checkbox>
+                        <app-checkbox label="แก้ไขข้อมูล"></app-checkbox>
+                        <app-checkbox label="ลบข้อมูล"></app-checkbox>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
     </div>
 
     <div class="pt-4 border border-gray-300 rounded-sm mt-4 p-4 space-y-2">

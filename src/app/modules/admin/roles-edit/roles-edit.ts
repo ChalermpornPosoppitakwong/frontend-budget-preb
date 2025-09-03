@@ -11,6 +11,24 @@ import { ModalService } from '@shared/services/modal.service';
   templateUrl: './roles-edit.html',
 })
 export class RolesEdit {
+  filters: any = [
+    {
+      value: '0001',
+      label: '1. หน้าหลัก'
+    },
+    {
+      value: '0002',
+      label: '2. งบประจำปี'
+    },
+    {
+      value: '0003',
+      label: '3. งบระหว่างปี'
+    },
+    {
+      value: '0004',
+      label: '4. การตั้งค่าระบบ'
+    }
+  ]
   menus: any = [
     {
       id: '0001',

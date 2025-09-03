@@ -106,18 +106,9 @@
                 <app-icon name="notification-bell" size="30" class="text-white"
                     ariaLabel="notification-bell"></app-icon>
                 <!-- Profile trigger -->
-                <div class="dropdown dropdown-end">
-                    <app-button tabindex="0" iconLeft="toggle" [outline]="true">
-                        Administrator
-                    </app-button>
-
-                    <ul tabindex="0" class="dropdown-content top-[56px] menu p-2 shadow bg-base-100 w-52 text-gray-700">
-                        <li><a class="hover:!bg-blue-100 hover:text-blue-400 text-sm font-normal">Role 1</a></li>
-                        <li><a class="hover:!bg-blue-100 hover:text-blue-400 text-sm font-normal">Role 2</a></li>
-                        <li><a class="hover:!bg-blue-100 hover:text-blue-400 text-sm font-normal">Role 3</a></li>
-                    </ul>
-                </div>
-
+                <app-dropdown [options]="roles" defaultValue="admin" iconLeft="toggle" [outline]="true"
+                    placeholder="เลือกรายการแสดง" icon="filter2" [top]="'[56px]'">
+                </app-dropdown>
 
                 <div class="drawer-end">
                     <input id="drawer-profile" type="checkbox" class="drawer-toggle" />

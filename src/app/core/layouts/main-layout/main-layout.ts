@@ -194,6 +194,17 @@ export class MainLayout {
     }
   ];
 
+  roles: any[] = [
+    {
+      label: 'ผู้ดูแลระบบ',
+      value: 'admin'
+    },
+    {
+      label: 'ผู้ใช้ทั่วไป',
+      value: 'user'
+    },
+  ];
+
   menus: any = {};
   openedMenu: any = null;
   activeChain: any[] = [];

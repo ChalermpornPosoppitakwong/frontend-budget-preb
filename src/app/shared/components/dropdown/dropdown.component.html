@@ -1,0 +1,64 @@
+<div class="dropdown" [class.dropdown-open]="isOpen">
+    <!-- Button -->
+    <div class="tooltip" [attr.data-tip]="multiple ? buttonTooltip : ''">
+
+        <app-button [attr.color]="type" [size]="size" class="w-full justify-between" [outline]="outline"
+            [iconRight]="iconRight" [iconLeft]="iconLeft" (click)="toggle()" aria-haspopup="true"
+            [attr.aria-expanded]="isOpen">
+            <div class="flex flex-wrap items-center gap-1 max-w-full truncate">
+                <!-- Single select -->
+                <ng-container *ngIf="!multiple">
+                    <span [ngClass]="textColor" class="text-sm font-normal"
+                        *ngIf="selectedSingle; else placeholderTpl">{{
+                        selectedSingle.label }}</span>
+                </ng-container>
+
+                <!-- Multi-select -->
+                <ng-container *ngIf="multiple">
+                    <ng-container *ngIf="selectedArray.length > 0; else placeholderTpl">
+                        <span *ngFor="let label of visibleLabels" [ngClass]="textColor"
+                            class="inline-block bg-blue-100 text-sm px-2 py-0.5 rounded truncate">
+                            {{ label }}
+                        </span>
+                        <span *ngIf="hiddenCount > 0"
+                            class="inline-block bg-gray-200 text-gray-700 text-sm px-2 py-0.5 rounded">
+                            +{{ hiddenCount }}
+                        </span>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Placeholder -->
+                <ng-template #placeholderTpl>
+                    <span class="text-gray-400 truncate">{{ placeholder }}</span>
+                </ng-template>
+
+                <span *ngIf="multiple" class="ml-2 flex items-center gap-1">
+                    <!-- Clear button -->
+                    <span *ngIf="hasValue" (click)="clear($event)"
+                        class="cursor-pointer text-gray-400 hover:text-gray-700">×</span>
+                </span>
+            </div>
+        </app-button>
+    </div>
+
+    <!-- Dropdown menu -->
+    <ul class="dropdown-content menu p-2 shadow-sm bg-base-100 w-52 text-gray-700" [ngClass]="'top-' + (top || '56px')">
+        <li *ngIf="multiple">
+            <app-checkbox [(ngModel)]="allSelected" label="ทั้งหมด" [indeterminate]="isIndeterminate"
+                (checkedChange)="toggleSelectAll($event)">
+            </app-checkbox>
+        </li>
+
+        <li *ngFor="let option of options" (click)="$event.stopPropagation()"
+            [ngClass]="!multiple && isSelected(option) ? 'bg-blue-100 text-blue-400 font-semibold' : ''"
+            class="hover:bg-blue-100 hover:text-blue-400 text-sm font-normal">
+            <app-checkbox *ngIf="multiple" [(ngModel)]="option.checked" [label]="option.label"
+                (checkedChange)="selectCheckbox(option, $event)">
+            </app-checkbox>
+            <span *ngIf="!multiple" (click)="select(option)"
+                class="active:bg-transparent hover:bg-transparent focus-visible:bg-transparent">{{
+                option.label }}</span>
+        </li>
+    </ul>
+
+</div>

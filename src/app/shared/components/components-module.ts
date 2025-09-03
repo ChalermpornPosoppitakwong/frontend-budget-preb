@@ -12,6 +12,7 @@ import { MenuItem } from './menu-item/menu-item';
 import { Row } from './row/row';
 import { Col } from './col/col';
 import { Tree } from './tree/tree.component';
+import { Dropdown } from './dropdown/dropdown.component';
 
 @NgModule({
   declarations: [],
@@ -28,8 +29,9 @@ import { Tree } from './tree/tree.component';
     MenuItem,
     Row,
     Col,
-    Tree
+    Tree,
+    Dropdown
   ],
-  exports: [Button, Icon, Table, Select, InputComponent, Textarea, Checkbox, Radio, MenuItem, Row, Col, Tree]
+  exports: [Button, Icon, Table, Select, InputComponent, Textarea, Checkbox, Radio, MenuItem, Row, Col, Tree, Dropdown]
 })
 export class ComponentsModule { }

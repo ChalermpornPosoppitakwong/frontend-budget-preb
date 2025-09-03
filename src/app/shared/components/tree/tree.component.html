@@ -3,7 +3,7 @@
         <li class="flex flex-col relative"
             [ngClass]="(!node.expanded || !treeNodeTpl) && !parent ? 'border-b border-[#E7EBEE]' : ''">
 
-            <!-- row -->
+            <!-- row (custom template case) -->
             <div *ngIf="treeNodeTpl" class="flex items-start gap-2 relative" [ngClass]="parent ? 'ml-8' : 'pt-2'">
 
                 <!-- vertical dashed line -->
@@ -14,9 +14,10 @@
 
                 <!-- toggle button -->
                 <span *ngIf="node.children?.length" (click)="toggle(node)"
-                    class="cursor-pointer w-4 select-none transition-transform"
-                    [ngClass]="node.expanded ? 'rotate-180' : ''">
-                    <app-icon name="chevron-down" size="20" class="text-gray-700" ariaLabel="chevron-down"></app-icon>
+                    class="cursor-pointer w-4 select-none transition-transform">
+                    <app-icon [name]="node.expanded ? 'chevron-up' : 'chevron-down'" size="20" class="text-gray-700"
+                        ariaLabel="chevron-down">
+                    </app-icon>
                 </span>
 
                 <!-- checkbox -->
@@ -30,7 +31,9 @@
                 </ng-container>
             </div>
 
+            <!-- row (default label case) -->
             <div *ngIf="!treeNodeTpl" class="flex items-center py-2 gap-2 relative" [ngClass]="parent ? 'ml-8' : ''">
+
                 <!-- vertical dashed line -->
                 <span *ngIf="parent" class="absolute left-0 top-0 h-full border-l border-dashed border-gray-300"></span>
 
@@ -39,9 +42,10 @@
 
                 <!-- toggle button -->
                 <span *ngIf="node.children?.length" (click)="toggle(node)"
-                    class="cursor-pointer w-4 select-none transition-transform"
-                    [ngClass]="node.expanded ? 'rotate-180' : ''">
-                    <app-icon name="chevron-down" size="20" class="text-gray-700" ariaLabel="chevron-down"></app-icon>
+                    class="cursor-pointer w-4 select-none transition-transform">
+                    <app-icon [name]="node.expanded ? 'chevron-up' : 'chevron-down'" size="20" class="text-gray-700"
+                        ariaLabel="chevron-down">
+                    </app-icon>
                 </span>
 
                 <!-- checkbox -->
@@ -55,10 +59,12 @@
                 </span>
             </div>
 
-            <!-- recursive -->
-            <app-tree *ngIf="node.children?.length && node.expanded" [data]="node.children ?? []" [parent]="node"
-                [treeNodeTpl]="treeNodeTpl" (selectionChange)="selectionChange.emit($event)">
-            </app-tree>
+            <!-- recursive (with CSS animation) -->
+            <div *ngIf="node.children?.length && node.expanded">
+                <app-tree [data]="node.children ?? []" [parent]="node" [treeNodeTpl]="treeNodeTpl"
+                    (selectionChange)="selectionChange.emit($event)">
+                </app-tree>
+            </div>
 
         </li>
     </ng-container>

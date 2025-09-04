@@ -4,6 +4,7 @@ import { Admin } from './admin';
 import { Roles } from './roles/roles';
 import { RolesEdit } from './roles-edit/roles-edit';
 import { Menu } from './menu/menu';
+import { MenuApi } from './menu-api/menu-api';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'menu',
     component: Menu
+  },
+  {
+    path: 'menu/api',
+    component: MenuApi
   }
 ];
 

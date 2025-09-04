@@ -246,40 +246,33 @@ export class MainLayout {
  * recursive หา chain ของเมนู
  */
   findChain(menus: any[], url: string, parents: any[] = []): any[] | null {
+    let bestMatch: any[] | null = null;
+
     for (const menu of menus) {
       const newParents = [...parents, menu];
 
-      if (menu.path === this.getBaseUrl(url)) {
-        return newParents;
+      // ✅ ถ้า url เริ่มต้นด้วย path ของ menu
+      if (url.startsWith(menu.path)) {
+        // อัปเดต bestMatch ถ้า path ปัจจุบันยาวกว่า match ที่เก็บไว้
+        if (!bestMatch || menu.path.length > bestMatch[bestMatch.length - 1].path.length) {
+          bestMatch = newParents;
+        }
       }
 
       if (menu.submenu?.length) {
         const found = this.findChain(menu.submenu, url, newParents);
         if (found) {
-          return found;
+          // เลือก chain ที่ match ยาวที่สุด
+          if (!bestMatch || found[found.length - 1].path.length > bestMatch[bestMatch.length - 1].path.length) {
+            bestMatch = found;
+          }
         }
       }
     }
-    return null;
+
+    return bestMatch;
   }
 
-  getBaseUrl(url: string) {
-    const segments = url.split('/').filter(s => s); // กรอง segment ว่าง
-
-    // ตรวจว่า segment สุดท้ายเป็นตัวเลขหรือ action เช่น edit/add/view
-    let endIndex = segments.length;
-    const lastSegment = segments[segments.length - 1];
-
-    if (!isNaN(+lastSegment)) {
-      // ถ้า segment สุดท้ายเป็นตัวเลข (id) → ตัด 2 segment สุดท้าย
-      endIndex = segments.length - 2;
-    } else if (['create', 'edit', 'view'].includes(lastSegment)) {
-      // ถ้า segment สุดท้ายเป็น action → ตัด 1 segment สุดท้าย
-      endIndex = segments.length - 1;
-    }
-
-    return '/' + segments.slice(0, endIndex).join('/');
-  }
   // ฟัง click ข้างนอก component
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {

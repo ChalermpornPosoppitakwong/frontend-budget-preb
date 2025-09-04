@@ -1,0 +1,42 @@
+<div class="px-4 py-6 bg-white rounded-md shadow-sm">
+    <app-row [gap]="4">
+        <app-col [sm]="6" [lg]="4">
+            <app-input placeholder="กรุณาระบุ" label="ค้นหา Request URL">
+                <app-button suffix color="primary" iconLeft="search">
+                    ค้นหา
+                </app-button>
+            </app-input>
+        </app-col>
+    </app-row>
+
+    <div class="divider"></div>
+
+    <app-row [gap]="4">
+        <app-col [span]="12" class="flex justify-end">
+            <app-button color="primary" iconLeft="plus" (click)="onCreate()">
+                เพิ่ม API
+            </app-button>
+        </app-col>
+    </app-row>
+
+
+    <app-row>
+        <app-col [span]="12">
+            <app-table [headers]="headers" [data]="data" (selectionChange)="onSelectionChange($event)"
+                [totalItems]="data.length" [loading]="loading" (sortChange)="onSortChange($event)" />
+        </app-col>
+    </app-row>
+
+    <ng-template #actions let-row>
+        <app-button color="primary" size="sm">
+            <app-icon name="edit" size="18" (click)="onEdit(row)"></app-icon>
+        </app-button>
+    </ng-template>
+
+    <ng-template #no let-row let-runningNo="runningNo">
+        {{ runningNo }}
+    </ng-template>
+    <ng-template #status let-row>
+        <span [ngClass]="row.status === 'ใช้งาน' ? 'text-green-500' : 'text-red-500'">{{ row.status }}</span>
+    </ng-template>
+</div>

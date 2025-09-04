@@ -1,0 +1,43 @@
+<div class="p-6 space-y-3">
+    <app-row [gap]="4">
+        <app-col [span]="12">
+            <app-input placeholder="กรุณาระบุ" label="ชื่อเมนู" hint="ชื่อเมนู หรือ id ของเมนู ไม่สามารถตั้งซ้ำได้"
+                [required]="true"></app-input>
+        </app-col>
+        <app-col [span]="12">
+            <app-textarea placeholder="กรุณาระบุ" label="หัวข้อเมนู"
+                hint="หัวข้อเมนู คือ ชื่อของเมนูที่แสดงในระบบ สามารถใช้ <br> ในการเพิ่มบรรทัด" [maxlength]="240"
+                [required]="true"></app-textarea>
+        </app-col>
+        <app-col [span]="12">
+            <app-textarea placeholder="กรุณาระบุ" label="Navigate parameter"></app-textarea>
+        </app-col>
+    </app-row>
+
+    <app-row [gap]="4">
+        <app-col [md]="12" [lg]="6">
+            <app-select placeholder="กรุณาระบุ" label="Navigate parameter"></app-select>
+        </app-col>
+        <app-col [md]="12" [lg]="6">
+            <app-input placeholder="กรุณาระบุ" label="Root path"></app-input>
+        </app-col>
+    </app-row>
+
+    <app-row [gap]="4" class="mb-2">
+        <app-col [span]="12">
+            <app-radio label="สถานะใช้งาน" [options]="status" direction="horizontal" [required]="true">
+            </app-radio>
+        </app-col>
+    </app-row>
+
+    <app-row class="pt-4" [gap]="4">
+        <app-col [span]="12" class="flex justify-center gap-2">
+            <app-button>
+                ยกเลิก
+            </app-button>
+            <app-button color="primary" (click)="onSave()">
+                บันทึก
+            </app-button>
+        </app-col>
+    </app-row>
+</div>

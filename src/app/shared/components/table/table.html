@@ -27,7 +27,7 @@
 
   @if(!loading){
   <tbody>
-    @for (row of data; track row) {
+    @for (row of data; track row;let i = $index) {
     <tr class="h-[40px] hover:bg-blue-100 cursor-pointer text-gray-700">
       @if(selectionType) {
       <td class="border border-blue-300 px-3 py-0 text-center">
@@ -43,9 +43,10 @@
       }
 
       @for(header of headers; track header) {
-      <td class="border border-blue-300 px-3 py-0 text-center" [ngClass]="header?.align ? 'text-' + header.align : ''">
+      <td class="border border-blue-300 px-3 py-0" [ngClass]="header?.align ? 'text-' + header.align : ''">
         @if(header.slot) {
-        <ng-container [ngTemplateOutlet]="header.slot" [ngTemplateOutletContext]="{ $implicit: row }"></ng-container>
+        <ng-container [ngTemplateOutlet]="header.slot"
+          [ngTemplateOutletContext]="{ $implicit: row, index: i, runningNo: (currentPage - 1) * pageSize + i + 1 }"></ng-container>
         } @else {
         <span>{{ header?.key ? row[header.key ?? ''] : '' }}</span>
         }
@@ -66,7 +67,7 @@
       }
 
       @for (header of headers; track header) {
-      <td class="border border-blue-300 px-3 py-0 text-center" [ngClass]="header?.align ? 'text-' + header.align : ''">
+      <td class="border border-blue-300 px-3 py-0" [ngClass]="header?.align ? 'text-' + header.align : ''">
         <div class="bg-gray-200 rounded h-4 w-3/4 mx-auto"></div>
       </td>
       }

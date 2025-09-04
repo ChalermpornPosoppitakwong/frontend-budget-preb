@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ComponentsModule } from "@shared/components/components-module";
+import { ModalService } from '@shared/services/modal.service';
+import { MenuManage } from '../menu-manage/menu-manage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -12,6 +15,8 @@ export class Menu {
   hovered: boolean = false;
 
   menus: any = []
+
+  constructor(private modalService: ModalService, private router: Router) { }
 
   onSearch() {
     // Implement search logic here
@@ -57,5 +62,47 @@ export class Menu {
         ]
       }
     ]
+  }
+
+  onDeleteMenu(node: any) {
+    // Implement delete logic here
+    this.modalService.delete().then((confirmed) => {
+      if (confirmed) {
+        // Remove the node from the menu
+      }
+    });
+  }
+
+  onCopyMenu(node: any) {
+    // Implement copy logic here
+    this.modalService.confirm('คุณต้องการทำสำเนารายการนี้ใช่หรือไม่?', '').then((confirmed) => {
+      if (confirmed) {
+        // Perform the copy operation
+      }
+    });
+  }
+
+  onCreateMenu() {
+    // Implement create logic here
+    this.modalService.openCustom(MenuManage, { title: 'สร้าง เมนูระบบ', outputs: ['save'] }).then((result) => {
+      if (result) {
+        // Perform the create operation
+      }
+    });
+  }
+
+  onEditMenu(node: any) {
+    // Implement edit logic here
+
+    this.modalService.openCustom(MenuManage, { title: 'แก้ไข เมนูระบบ', outputs: ['save'] }).then((result) => {
+      if (result) {
+        // Perform the edit operation
+      }
+    });
+  }
+
+  onApiMenu(node: any) {
+    // Implement API logic here
+    this.router.navigate(['/admin/menu/api']);
   }
 }

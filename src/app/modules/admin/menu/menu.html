@@ -25,7 +25,7 @@
             </div>
         </app-col>
         <app-col [md]="6" [lg]="4" class="flex justify-end">
-            <app-button color="primary" iconLeft="plus">
+            <app-button color="primary" iconLeft="plus" (click)="onCreateMenu()">
                 เพิ่ม เมนูระบบ
             </app-button>
         </app-col>
@@ -44,17 +44,18 @@
                             <p class="text-xs font-normal text-gray-500">menu id: {{ node.id }}</p>
                         </div>
                         <div *ngIf="node.hovered" class="flex items-center gap-2">
-                            <app-icon name="plus" size="20" class="tooltip text-gray-700"
-                                data-tip="เพิ่มเมนู"></app-icon>
+                            <app-icon name="plus" size="20" class="tooltip text-gray-700" data-tip="เพิ่มเมนู"
+                                (click)="onCreateMenu()"></app-icon>
                             <app-icon *ngIf="!node.children" name="copy" size="20" class="tooltip text-gray-700"
-                                data-tip="สลับเมนู"></app-icon>
+                                data-tip="คัดลอกเมนู" (click)="onCopyMenu(node)"></app-icon>
                             <app-icon name="configuration-outline" size="20" class="tooltip text-gray-700"
-                                data-tip="แก้ไขเมนู"></app-icon>
-                            <app-icon name="api" size="20" class="tooltip text-gray-700" data-tip="API"></app-icon>
+                                data-tip="แก้ไขเมนู" (click)="onEditMenu(node)"></app-icon>
+                            <app-icon name="api" size="20" class="tooltip text-gray-700" data-tip="API"
+                                (click)="onApiMenu(node)"></app-icon>
                             <app-icon *ngIf="!node.children" name="swap" size="20" class="tooltip text-gray-700"
                                 data-tip="สลับเมนู"></app-icon>
-                            <app-icon name="bin-outline" size="20" class="tooltip text-gray-700"
-                                data-tip="ลบเมนู"></app-icon>
+                            <app-icon name="bin-outline" size="20" class="tooltip text-gray-700" data-tip="ลบเมนู"
+                                (click)="onDeleteMenu(node)"></app-icon>
                         </div>
                     </div>
                 </div>

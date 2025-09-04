@@ -72,6 +72,17 @@ export class RolesEdit {
     }
   ]
 
+  status: any[] = [
+    {
+      value: 'Y',
+      label: 'ใช้งาน'
+    },
+    {
+      value: 'N',
+      label: 'ไม่ใช้งาน'
+    }
+  ]
+
   filter: any[] = []
 
   constructor(private router: Router, private modalService: ModalService, private alertService: AlertService) { }

@@ -1,94 +1,104 @@
 <div class="px-4 py-6 bg-white rounded-md shadow-sm">
-    <app-row [gap]="4">
-        <app-col [span]="12">
+    <div class="space-y-2">
+        <app-row [gap]="4">
+            <app-col [span]="12">
+                <div class="py-1 px-2 bg-blue-700 text-base font-semibold text-white">
+                    Role Detail
+                </div>
+            </app-col>
+        </app-row>
+
+        <app-row [gap]="4" class="mb-2">
+            <app-col [md]="12" [lg]="4">
+                <app-input label="Role name" placeholder="กรุณาระบุ" [required]="true"></app-input>
+            </app-col>
+        </app-row>
+
+        <app-row [gap]="4" class="mb-2">
+            <app-col [span]="12">
+                <app-textarea label="Role Description" placeholder="กรุณาระบุ"></app-textarea>
+            </app-col>
+        </app-row>
+
+        <app-row [gap]="4" class="mb-2">
+            <app-col [span]="12">
+                <app-radio label="สถานะใช้งาน" [options]="status" direction="horizontal" [required]="true">
+                </app-radio>
+            </app-col>
+        </app-row>
+        <div class="grid grid-cols-1 gap-4 py-2">
             <div class="py-1 px-2 bg-blue-700 text-base font-semibold text-white">
-                Role Detail
+                Role Menu
             </div>
-        </app-col>
-    </app-row>
+        </div>
 
-    <app-row [gap]="4" class="mb-2">
-        <app-col [md]="12" [lg]="6">
-            <app-textarea label="Role name" placeholder="กรุณาระบุ" [required]="true"></app-textarea>
-        </app-col>
-        <app-col [md]="12" [lg]="6">
-            <app-textarea label="Role Description" placeholder="กรุณาระบุ"></app-textarea>
-        </app-col>
-    </app-row>
+        <app-row [gap]="4">
+            <app-col [sm]="6" [lg]="4">
+                <app-input placeholder="กรุณาระบุ" label="ค้นหา เมนู">
+                    <app-button suffix color="primary" iconLeft="search">
+                        ค้นหา
+                    </app-button>
+                </app-input>
+            </app-col>
+        </app-row>
 
-    <div class="grid grid-cols-1 gap-4 py-2">
-        <div class="py-1 px-2 bg-blue-700 text-base font-semibold text-white">
-            Role Menu
+        <br />
+
+        <div class="flex items-center gap-4">
+            <p class="text-gray-700 font-semibold">รายการ เมนู</p>
+
+            <app-dropdown [options]="filters" [(ngModel)]="filter" placeholder="เลือกรายการแสดง" iconRight="filter2"
+                [multiple]="true">
+            </app-dropdown>
+        </div>
+
+        <div class="grid grid-cols-1 pt-2">
+            <app-tree [data]="menus" [treeNodeTpl]="treeNode"></app-tree>
+            <ng-template #treeNode let-node let-parent="parent" let-toggle="toggle">
+                <div class="w-full">
+                    <div class="flex flex-col items-start cursor-pointer pb-4"
+                        [ngClass]="parent ? 'border-b border-[#E7EBEE]' : ''" (click)="toggle(node)">
+                        <span class="text-gray-700 text-sm font-semibold">{{ node.label }}</span>
+                        <p class="text-xs font-normal text-gray-500">menu id: {{ node.id }}</p>
+                    </div>
+                    <div *ngIf="parent" class="flex flex-col items-start p-2 bg-gray-100 mb-2">
+                        <app-checkbox-group label="สิทธิ์การทำงาน" [(ngModel)]="node.permissions" direction="horizontal"
+                            [options]="[
+                            { label: 'เพิ่มข้อมูล' },
+                            { label: 'แก้ไขข้อมูล'},
+                            { label: 'ลบข้อมูล' }
+                        ]">
+                        </app-checkbox-group>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+
+        <div class="pt-4 border border-gray-300 rounded-sm mt-4 p-4 space-y-2">
+            <app-row [gap]="4">
+                <app-col [md]="6" [lg]="6">
+                    <p class="text-gray-700 text-xs font-bold">วันที่สร้าง</p>
+                    <p class="text-gray-700 text-xs font-medium">12/12/2568 10:10</p>
+                </app-col>
+                <app-col [md]="6" [lg]="6">
+                    <p class="text-gray-700 text-xs font-bold">สร้างโดย</p>
+                    <p class="text-gray-700 text-xs font-medium">Administrator</p>
+                </app-col>
+            </app-row>
+
+            <app-row [gap]="4">
+                <app-col [md]="6" [lg]="6">
+                    <p class="text-gray-700 text-xs font-bold">วันที่แก้ไข</p>
+                    <p class="text-gray-700 text-xs font-medium">12/12/2568 10:10</p>
+                </app-col>
+                <app-col [md]="6" [lg]="6">
+                    <p class="text-gray-700 text-xs font-bold">แก้ไขโดย</p>
+                    <p class="text-gray-700 text-xs font-medium">Administrator</p>
+                </app-col>
+            </app-row>
         </div>
     </div>
 
-    <br />
-
-    <app-row [gap]="4">
-        <app-col [sm]="6" [lg]="4">
-            <app-input placeholder="กรุณาระบุ">
-                <app-button suffix color="primary" iconLeft="search">
-                    ค้นหา
-                </app-button>
-            </app-input>
-        </app-col>
-    </app-row>
-
-    <br />
-
-    <div class="flex items-center gap-4">
-        <p class="text-gray-700 font-semibold">รายการ เมนู</p>
-
-        <app-dropdown [options]="filters" [(ngModel)]="filter" placeholder="เลือกรายการแสดง" iconRight="filter2"
-            [multiple]="true">
-        </app-dropdown>
-    </div>
-
-    <div class="grid grid-cols-1 pt-2">
-        <app-tree [data]="menus" [treeNodeTpl]="treeNode"></app-tree>
-        <ng-template #treeNode let-node let-parent="parent" let-toggle="toggle">
-            <div class="w-full">
-                <div class="flex flex-col items-start cursor-pointer pb-4"
-                    [ngClass]="parent ? 'border-b border-[#E7EBEE]' : ''" (click)="toggle(node)">
-                    <span class="text-gray-700 text-sm font-semibold">{{ node.label }}</span>
-                    <p class="text-xs font-normal text-gray-500">menu id: {{ node.id }}</p>
-                </div>
-                <div *ngIf="parent" class="flex flex-col items-start p-2 bg-gray-100 mb-2">
-                    <app-checkbox-group label="สิทธิ์การทำงาน" [(ngModel)]="node.permissions" direction="horizontal"
-                        [options]="[
-                        { label: 'เพิ่มข้อมูล' },
-                        { label: 'แก้ไขข้อมูล'},
-                        { label: 'ลบข้อมูล' }
-                    ]">
-                    </app-checkbox-group>
-                </div>
-            </div>
-        </ng-template>
-    </div>
-
-    <div class="pt-4 border border-gray-300 rounded-sm mt-4 p-4 space-y-2">
-        <app-row [gap]="4">
-            <app-col [md]="6" [lg]="6">
-                <p class="text-gray-700 text-xs font-bold">วันที่สร้าง</p>
-                <p class="text-gray-700 text-xs font-medium">12/12/2568 10:10</p>
-            </app-col>
-            <app-col [md]="6" [lg]="6">
-                <p class="text-gray-700 text-xs font-bold">สร้างโดย</p>
-                <p class="text-gray-700 text-xs font-medium">Administrator</p>
-            </app-col>
-        </app-row>
-
-        <app-row [gap]="4">
-            <app-col [md]="6" [lg]="6">
-                <p class="text-gray-700 text-xs font-bold">วันที่แก้ไข</p>
-                <p class="text-gray-700 text-xs font-medium">12/12/2568 10:10</p>
-            </app-col>
-            <app-col [md]="6" [lg]="6">
-                <p class="text-gray-700 text-xs font-bold">แก้ไขโดย</p>
-                <p class="text-gray-700 text-xs font-medium">Administrator</p>
-            </app-col>
-        </app-row>
-    </div>
 
     <div class="fixed bottom-0 left-0 bg-white w-full h-14">
         <div class="flex items-center justify-center gap-4 h-full">

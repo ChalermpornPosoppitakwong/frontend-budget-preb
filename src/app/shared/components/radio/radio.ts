@@ -7,20 +7,34 @@ import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/f
     standalone: true,
     imports: [CommonModule, FormsModule],
     template: `
-    <label *ngFor="let opt of options" class="label cursor-pointer">
-      <input
-        type="radio"
-        class="radio radio-xs text-blue-600"
-        [name]="name"
-        [value]="opt.value"
-        [checked]="opt.value === value"
-        (change)="onChange(opt.value)"
-      />
+        @if(label) {
+            <!-- Label -->
+            <div class="label flex items-center justify-start">
+              <span class="mb-1 label-text text-sm font-semibold text-gray-600">{{ label }}</span>
 
-      @if(opt.label) {
-          <span class="label-text ml-2">{{ opt.label }}</span>
-      }
-    </label>
+              @if(required) {
+                  <span class="label-text-alt text-red-500">*</span>
+              }
+            </div>
+        }
+
+        <!-- Radio buttons -->
+        <div [ngClass]="direction === 'vertical' ? 'flex flex-col gap-2' : 'flex flex-row gap-4 items-center'">
+            <label *ngFor="let opt of options" class="cursor-pointer flex items-center gap-2">
+                <input
+                type="radio"
+                class="radio radio-xs text-blue-600"
+                [name]="name"
+                [value]="opt.value"
+                [checked]="opt.value === value"
+                [required]="required"
+                (change)="onChange(opt.value)"
+                />
+                @if(opt.label) {
+                    <span class="label-text text-gray-700 text-sm font-semibold">{{ opt.label }}</span>
+                }
+            </label>
+        </div>
   `,
     providers: [
         {
@@ -31,10 +45,11 @@ import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/f
     ]
 })
 export class Radio implements ControlValueAccessor {
+    @Input() direction: 'vertical' | 'horizontal' = 'vertical';
     @Input() options: { label: string; value: any }[] = [];
     @Input() name = '';
-
-    @HostBinding('class') hostClass = 'flex flex-col justify-center items-center gap-2';
+    @Input() label?: string;      // เพิ่ม Label title
+    @Input() required = false;    // เพิ่ม required
 
     value: any;
 

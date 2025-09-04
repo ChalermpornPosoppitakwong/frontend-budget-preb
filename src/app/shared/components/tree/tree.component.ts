@@ -21,6 +21,8 @@ export class Tree implements OnInit {
     parent?: any;
   }[] = [];
 
+  @Input() level = 0; // 0 = root
+  @Input() hideCheckbox: boolean = false;
   @Input() parent?: any;
   @Input() treeNodeTpl?: TemplateRef<any>;
 

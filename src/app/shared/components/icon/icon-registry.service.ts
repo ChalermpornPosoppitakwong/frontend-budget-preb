@@ -15,10 +15,28 @@ export class IconRegistryService {
      */
     getSvg(name: string): Observable<string> {
         const key = name.trim().toLowerCase();
-        if (this.cache.has(key)) return this.cache.get(key)!;
+
+        if (this.cache.has(key)) {
+            return this.cache.get(key)!;
+        }
+
+        const stored = localStorage.getItem(`icon_${key}`);
+        if (stored) {
+            const obs$ = of(stored);
+            this.cache.set(key, obs$);
+            return obs$;
+        }
 
         const req$ = this.http.get(`/assets/icons/${key}.svg`, { responseType: 'text' }).pipe(
             map((raw) => this.cleanSvg(raw)),
+            map((cleaned) => {
+                try {
+                    localStorage.setItem(`icon_${key}`, cleaned); // save ลง browser
+                } catch (e) {
+                    console.warn('localStorage full?', e);
+                }
+                return cleaned;
+            }),
             shareReplay(1)
         );
 

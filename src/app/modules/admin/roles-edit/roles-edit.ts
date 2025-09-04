@@ -59,7 +59,15 @@ export class RolesEdit {
       label: '4. การตั้งค่าระบบ',
       children: [
         { id: '000401', label: '4.1 ผู้ใช้งาน', checked: true },
-        { id: '000402', label: '4.2 สิทธิ์การเข้าถึง', checked: true },
+        {
+          id: '000402',
+          label: '4.2 สิทธิ์การเข้าถึง',
+          checked: true,
+          children: [
+            { id: '00040201', label: '4.2.1 View Access', checked: true },
+            { id: '00040202', label: '4.2.2 Edit Access', checked: false },
+          ]
+        },
       ]
     }
   ]

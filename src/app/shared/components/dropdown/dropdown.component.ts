@@ -143,6 +143,7 @@ export class Dropdown<T = any> implements OnInit, ControlValueAccessor {
     /** ล้างค่า */
     clear(event: Event) {
         event.stopPropagation();
+        this.options.forEach(o => o.checked = false);
         this.updateValue(this.multiple ? [] : undefined);
     }
 

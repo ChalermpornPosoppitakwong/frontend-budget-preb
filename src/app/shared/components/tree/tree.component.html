@@ -4,13 +4,15 @@
             [ngClass]="(!node.expanded || !treeNodeTpl) && !parent ? 'border-b border-[#E7EBEE]' : ''">
 
             <!-- row (custom template case) -->
-            <div *ngIf="treeNodeTpl" class="flex items-start gap-2 relative" [ngClass]="parent ? 'ml-8' : 'pt-2'">
+            <div *ngIf="treeNodeTpl" class="flex items-start py-2 gap-2 relative" [style.marginLeft.px]="level * 16">
 
                 <!-- vertical dashed line -->
-                <span *ngIf="parent" class="absolute left-0 top-0 h-full border-l border-dashed border-gray-300"></span>
+                <span *ngIf="!(node.children?.length)"
+                    class="absolute left-0 top-0 h-full border-l border-dashed border-gray-300"></span>
 
                 <!-- horizontal dashed line -->
-                <span *ngIf="parent" class="flex-shrink-0 w-4 h-0.5 mt-2 border-t border-dashed border-gray-300"></span>
+                <span *ngIf="!(node.children?.length)"
+                    class="flex-shrink-0 w-4 h-0.5 mt-2 border-t border-dashed border-gray-300"></span>
 
                 <!-- toggle button -->
                 <span *ngIf="node.children?.length" (click)="toggle(node)"
@@ -21,8 +23,8 @@
                 </span>
 
                 <!-- checkbox -->
-                <app-checkbox [(ngModel)]="node.checked" [indeterminate]="node.indeterminate ?? false"
-                    (ngModelChange)="toggleCheck(node, $event, parent)">
+                <app-checkbox *ngIf="!hideCheckbox" [(ngModel)]="node.checked"
+                    [indeterminate]="node.indeterminate ?? false" (ngModelChange)="toggleCheck(node, $event, parent)">
                 </app-checkbox>
 
                 <!-- custom template -->
@@ -32,13 +34,15 @@
             </div>
 
             <!-- row (default label case) -->
-            <div *ngIf="!treeNodeTpl" class="flex items-center py-2 gap-2 relative" [ngClass]="parent ? 'ml-8' : ''">
+            <div *ngIf="!treeNodeTpl" class="flex items-center py-2 gap-2 relative" [style.marginLeft.px]="level * 16">
 
                 <!-- vertical dashed line -->
-                <span *ngIf="parent" class="absolute left-0 top-0 h-full border-l border-dashed border-gray-300"></span>
+                <span *ngIf="!(node.children?.length)"
+                    class="absolute left-0 top-0 h-full border-l border-dashed border-gray-300"></span>
 
                 <!-- horizontal dashed line -->
-                <span *ngIf="parent" class="flex-shrink-0 w-4 h-0.5 mt-0 border-t border-dashed border-gray-300"></span>
+                <span *ngIf="!(node.children?.length)"
+                    class="flex-shrink-0 w-4 h-0.5 mt-0 border-t border-dashed border-gray-300"></span>
 
                 <!-- toggle button -->
                 <span *ngIf="node.children?.length" (click)="toggle(node)"
@@ -49,8 +53,8 @@
                 </span>
 
                 <!-- checkbox -->
-                <app-checkbox [(ngModel)]="node.checked" [indeterminate]="node.indeterminate ?? false"
-                    (ngModelChange)="toggleCheck(node, $event, parent)">
+                <app-checkbox *ngIf="!hideCheckbox" [(ngModel)]="node.checked"
+                    [indeterminate]="node.indeterminate ?? false" (ngModelChange)="toggleCheck(node, $event, parent)">
                 </app-checkbox>
 
                 <!-- label -->
@@ -62,10 +66,9 @@
             <!-- recursive (with CSS animation) -->
             <div *ngIf="node.children?.length && node.expanded">
                 <app-tree [data]="node.children ?? []" [parent]="node" [treeNodeTpl]="treeNodeTpl"
-                    (selectionChange)="selectionChange.emit($event)">
+                    (selectionChange)="selectionChange.emit($event)" [hideCheckbox]="hideCheckbox" [level]="level + 1">
                 </app-tree>
             </div>
-
         </li>
     </ng-container>
 </ul>

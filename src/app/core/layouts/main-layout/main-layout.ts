@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HomeRoutingModule } from '@modules/home/home-routing-module';
 import { ComponentsModule } from '@shared/components/components-module';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [HomeRoutingModule, RouterOutlet, CommonModule, ComponentsModule],
+  imports: [HomeRoutingModule, RouterOutlet, CommonModule, FormsModule, ComponentsModule],
   templateUrl: './main-layout.html',
 })
 export class MainLayout {
@@ -204,6 +205,8 @@ export class MainLayout {
       value: 'user'
     },
   ];
+
+  role: string = 'admin'
 
   menus: any = {};
   openedMenu: any = null;

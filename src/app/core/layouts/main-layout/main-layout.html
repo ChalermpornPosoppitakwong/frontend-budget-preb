@@ -106,7 +106,7 @@
                 <app-icon name="notification-bell" size="30" class="text-white"
                     ariaLabel="notification-bell"></app-icon>
                 <!-- Profile trigger -->
-                <app-dropdown [options]="roles" defaultValue="admin" iconLeft="toggle" [outline]="true"
+                <app-dropdown [options]="roles" [(ngModel)]="role" iconLeft="toggle" [outline]="true"
                     placeholder="เลือกรายการแสดง" icon="filter2" [top]="'[56px]'">
                 </app-dropdown>
 

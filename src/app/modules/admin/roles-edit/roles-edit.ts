@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ComponentsModule } from '@shared/components/components-module';
 import { AlertService } from '@shared/services/alert.service';
@@ -7,7 +8,7 @@ import { ModalService } from '@shared/services/modal.service';
 
 @Component({
   selector: 'app-roles-edit',
-  imports: [CommonModule, ComponentsModule],
+  imports: [CommonModule, FormsModule, ComponentsModule],
   templateUrl: './roles-edit.html',
 })
 export class RolesEdit {
@@ -62,6 +63,8 @@ export class RolesEdit {
       ]
     }
   ]
+
+  filter: any[] = []
 
   constructor(private router: Router, private modalService: ModalService, private alertService: AlertService) { }
 

@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, TemplateRef, HostListener, ElementRef, OnInit } from '@angular/core';
+import { CommonModule } from "@angular/common";
+import { Component, ElementRef, EventEmitter, forwardRef, HostListener, Input, OnInit, Output, TemplateRef } from "@angular/core";
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Checkbox } from "../checkbox/checkbox";
-import { FormsModule } from '@angular/forms';
 import { Button } from "../button/button";
 
 export interface DropdownOption<T = any> {
@@ -15,8 +15,13 @@ export interface DropdownOption<T = any> {
     standalone: true,
     imports: [CommonModule, FormsModule, Checkbox, Button],
     templateUrl: './dropdown.component.html',
+    providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => Dropdown),
+        multi: true
+    }]
 })
-export class Dropdown<T = any> implements OnInit {
+export class Dropdown<T = any> implements OnInit, ControlValueAccessor {
     constructor(public el: ElementRef) { }
 
     @Input() top?: string;
@@ -29,7 +34,7 @@ export class Dropdown<T = any> implements OnInit {
     @Input() selected?: DropdownOption<T> | DropdownOption<T>[];
     @Input() placeholder = 'Select an option';
     @Input() optionTpl?: TemplateRef<any>; // custom template
-    @Input() type: string = 'primary';      // daisyUI btn type
+    @Input() type: string = 'primary'; // daisyUI btn type
     @Input() size: 'sm' | 'md' | 'lg' = 'md'; // daisyUI btn size
 
     @Output() selectedChange = new EventEmitter<DropdownOption<T> | DropdownOption<T>[]>();
@@ -59,6 +64,45 @@ export class Dropdown<T = any> implements OnInit {
         this.isOpen = !this.isOpen;
     }
 
+    /** ControlValueAccessor */
+    private onChange: (value: any) => void = () => { };
+    private onTouched: () => void = () => { };
+
+    writeValue(value: DropdownOption<T> | DropdownOption<T>[] | undefined): void {
+        if (this.multiple) {
+            // multiple: หา option ที่ match กับ array ของค่า
+            const valuesArray = Array.isArray(value) ? value : [];
+            const selectedValues = valuesArray.map(v => (typeof v === 'object' && v !== null && 'value' in v) ? v.value : v);
+            this.selected = this.options.filter(o => selectedValues.includes(o.value));
+        } else {
+            // single: หา option ที่ match ค่าเดียว
+            this.selected = this.options.find(o => o.value === value) || undefined;
+        }
+    }
+
+    registerOnChange(fn: any): void {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: any): void {
+        this.onTouched = fn;
+    }
+
+    setDisabledState?(isDisabled: boolean): void { }
+
+    /** emit ทั้ง selectedChange และ CVA */
+    private updateValue(value: DropdownOption<T> | DropdownOption<T>[] | undefined) {
+        this.selected = value;
+        this.selectedChange.emit(value);
+
+        if (Array.isArray(value)) {
+            this.onChange(value.map(v => v.value));
+        } else {
+            this.onChange(value?.value);
+        }
+        this.onTouched();
+    }
+
     /** เลือกเฉพาะ checkbox */
     selectCheckbox(option: DropdownOption<T>, checked: boolean) {
         let arr = Array.isArray(this.selected) ? [...this.selected] : [];
@@ -70,15 +114,13 @@ export class Dropdown<T = any> implements OnInit {
             arr = arr.filter(o => o.value !== option.value);
         }
 
-        this.selected = arr;
-        this.selectedChange.emit(this.selected);
+        this.updateValue(arr);
     }
 
     /** เลือกแบบ click สำหรับ single-select */
     select(option: DropdownOption<T>) {
         if (!this.multiple) {
-            this.selected = option;
-            this.selectedChange.emit(option);
+            this.updateValue(option);
             this.isOpen = false;
         }
     }
@@ -91,35 +133,17 @@ export class Dropdown<T = any> implements OnInit {
 
     /** Select or deselect all */
     toggleSelectAll(checked: boolean) {
-        if (checked) {
-            this.selected = [...this.options];
-        } else {
-            this.selected = [];
-        }
+        const value = checked ? [...this.options] : [];
 
-        this.options.map(o => {
-            o.checked = this.allSelected;
-            return o;
-        });
+        this.options.forEach(o => o.checked = checked);
 
-        this.selectedChange.emit(this.selected);
+        this.updateValue(value);
     }
 
     /** ล้างค่า */
     clear(event: Event) {
-        event.stopPropagation(); // ป้องกัน toggle dropdown
-        if (this.multiple) {
-            this.selected = [];
-        } else {
-            this.selected = undefined;
-        }
-
-        this.options.map(o => {
-            o.checked = this.isSelected(o);
-            return o;
-        });
-
-        this.selectedChange.emit(this.selected);
+        event.stopPropagation();
+        this.updateValue(this.multiple ? [] : undefined);
     }
 
     /** Visible labels for button */
@@ -150,7 +174,11 @@ export class Dropdown<T = any> implements OnInit {
 
     /** Check if all selected */
     get allSelected(): boolean {
-        return this.selectedArray.length === this.options.length;
+        return this.selectedArray.length === this.options.length && this.options.length > 0;
+    }
+
+    set allSelected(val: boolean) {
+        this.toggleSelectAll(val);
     }
 
     /** daisyUI button classes */
@@ -183,7 +211,7 @@ export class Dropdown<T = any> implements OnInit {
                 default: return 'text-white';
             }
         } else {
-            return 'text-white'
+            return 'text-white';
         }
     }
 }

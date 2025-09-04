@@ -13,6 +13,7 @@ import { Row } from './row/row';
 import { Col } from './col/col';
 import { Tree } from './tree/tree.component';
 import { Dropdown } from './dropdown/dropdown.component';
+import { CheckboxGroup } from './checkbox/checkbox-group';
 
 @NgModule({
   declarations: [],
@@ -30,8 +31,9 @@ import { Dropdown } from './dropdown/dropdown.component';
     Row,
     Col,
     Tree,
-    Dropdown
+    Dropdown,
+    CheckboxGroup
   ],
-  exports: [Button, Icon, Table, Select, InputComponent, Textarea, Checkbox, Radio, MenuItem, Row, Col, Tree, Dropdown]
+  exports: [Button, Icon, Table, Select, InputComponent, Textarea, Checkbox, Radio, MenuItem, Row, Col, Tree, Dropdown, CheckboxGroup]
 })
 export class ComponentsModule { }

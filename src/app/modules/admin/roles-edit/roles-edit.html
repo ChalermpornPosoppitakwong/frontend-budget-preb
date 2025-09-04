@@ -54,14 +54,13 @@
                     <p class="text-xs font-normal text-gray-500">menu id: {{ node.id }}</p>
                 </div>
                 <div *ngIf="parent" class="flex flex-col items-start p-2 bg-gray-100 mb-2">
-                    <p class="text-sm font-medium text-gray-500">สิทธิ์การทำงาน</p>
-
-                    <div class="flex items-center gap-4 mt-2">
-                        <app-checkbox label="ทั้งหมด"></app-checkbox>
-                        <app-checkbox label="เพิ่มข้อมูล"></app-checkbox>
-                        <app-checkbox label="แก้ไขข้อมูล"></app-checkbox>
-                        <app-checkbox label="ลบข้อมูล"></app-checkbox>
-                    </div>
+                    <app-checkbox-group label="สิทธิ์การทำงาน" [(ngModel)]="node.permissions" direction="horizontal"
+                        [options]="[
+                        { label: 'เพิ่มข้อมูล' },
+                        { label: 'แก้ไขข้อมูล'},
+                        { label: 'ลบข้อมูล' }
+                    ]">
+                    </app-checkbox-group>
                 </div>
             </div>
         </ng-template>

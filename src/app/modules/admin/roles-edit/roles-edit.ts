@@ -42,8 +42,8 @@ export class RolesEdit {
       id: '0002',
       label: '2. งบประจำปี',
       children: [
-        { id: '000201', label: '2.1 Budget Overview' },
-        { id: '000202', label: '2.2 Budget Details' },
+        { id: '000201', label: '2.1 Budget Overview', checked: true },
+        { id: '000202', label: '2.2 Budget Details', checked: false },
       ]
     },
     {
@@ -58,8 +58,8 @@ export class RolesEdit {
       id: '0004',
       label: '4. การตั้งค่าระบบ',
       children: [
-        { id: '000401', label: '4.1 ผู้ใช้งาน' },
-        { id: '000402', label: '4.2 สิทธิ์การเข้าถึง' },
+        { id: '000401', label: '4.1 ผู้ใช้งาน', checked: true },
+        { id: '000402', label: '4.2 สิทธิ์การเข้าถึง', checked: true },
       ]
     }
   ]

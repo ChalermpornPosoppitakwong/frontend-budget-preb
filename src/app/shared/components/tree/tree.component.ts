@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, ContentChild, TemplateRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ContentChild, TemplateRef, OnInit } from '@angular/core';
 import { Checkbox } from "../checkbox/checkbox";
 import { FormsModule } from '@angular/forms';
 import { Icon } from '../icon/icon';
@@ -11,7 +11,7 @@ import { Icon } from '../icon/icon';
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.css']
 })
-export class Tree {
+export class Tree implements OnInit {
   @Input() data: {
     label: string;
     children?: any[];
@@ -25,6 +25,39 @@ export class Tree {
   @Input() treeNodeTpl?: TemplateRef<any>;
 
   @Output() selectionChange = new EventEmitter<any>();
+
+  ngOnInit() {
+    this.initTree(this.data);
+  }
+
+  private initTree(nodes: any[]): boolean {
+    let anyChildChecked = false;
+
+    for (const node of nodes) {
+      let childChecked = false;
+
+      if (node.children?.length) {
+        childChecked = this.initTree(node.children); // recursive
+        const allChecked = node.children.every((c: any) => c.checked);
+        const noneChecked = node.children.every((c: any) => !c.checked && !c.indeterminate);
+
+        node.checked = allChecked;
+        node.indeterminate = !allChecked && !noneChecked;
+
+        if (childChecked) {
+          node.expanded = true;
+        }
+      }
+
+      if (node.checked) {
+        childChecked = true;
+      }
+
+      anyChildChecked = anyChildChecked || childChecked;
+    }
+
+    return anyChildChecked;
+  }
 
   toggle(node: any) {
     node.expanded = !node.expanded;

@@ -1,0 +1,75 @@
+<div class="px-4 py-6 bg-white rounded-md shadow-sm space-y-4">
+    <app-row [gap]="4">
+        <app-col [sm]="6" [lg]="4">
+            <app-input placeholder="กรุณาระบุ" label="Menu">
+            </app-input>
+        </app-col>
+        <app-col [sm]="6" [lg]="4">
+            <app-input placeholder="กรุณาระบุ" label="ค้นหา" (click)="onSearch()">
+                <app-button suffix color="primary" iconLeft="search">
+                    ค้นหา
+                </app-button>
+            </app-input>
+        </app-col>
+    </app-row>
+
+    <div class="divider"></div>
+
+    <app-row [gap]="4">
+        <app-col [md]="6" [lg]="8">
+            <div class="flex items-center gap-4">
+                <p class="text-gray-700 font-semibold">รายการ เมนู</p>
+
+                <app-dropdown [options]="[]" placeholder="เลือกรายการแสดง" iconRight="filter2" [multiple]="true">
+                </app-dropdown>
+            </div>
+        </app-col>
+        <app-col [md]="6" [lg]="4" class="flex justify-end">
+            <app-button color="primary" iconLeft="plus">
+                เพิ่ม เมนูระบบ
+            </app-button>
+        </app-col>
+    </app-row>
+
+    <app-row>
+        <app-col [span]="12">
+            @if(menus && menus.length > 0) {
+            <app-tree [data]="menus" [treeNodeTpl]="treeNode" [hideCheckbox]="true"></app-tree>
+            <ng-template #treeNode let-node let-parent="parent">
+                <div class="w-full hover:bg-blue-200" [ngClass]="parent ? 'border-b border-[#E7EBEE]' : ''">
+                    <div class="flex gap-6 flex-1 cursor-pointer p-2" (mouseenter)="node.hovered = true"
+                        (mouseleave)="node.hovered = false">
+                        <div class="flex flex-col items-start">
+                            <span class="text-gray-700 text-sm font-semibold">{{ node.label }}</span>
+                            <p class="text-xs font-normal text-gray-500">menu id: {{ node.id }}</p>
+                        </div>
+                        <div *ngIf="node.hovered" class="flex items-center gap-2">
+                            <app-icon name="plus" size="20" class="tooltip text-gray-700"
+                                data-tip="เพิ่มเมนู"></app-icon>
+                            <app-icon *ngIf="!node.children" name="copy" size="20" class="tooltip text-gray-700"
+                                data-tip="สลับเมนู"></app-icon>
+                            <app-icon name="configuration-outline" size="20" class="tooltip text-gray-700"
+                                data-tip="แก้ไขเมนู"></app-icon>
+                            <app-icon name="api" size="20" class="tooltip text-gray-700" data-tip="API"></app-icon>
+                            <app-icon *ngIf="!node.children" name="swap" size="20" class="tooltip text-gray-700"
+                                data-tip="สลับเมนู"></app-icon>
+                            <app-icon name="bin-outline" size="20" class="tooltip text-gray-700"
+                                data-tip="ลบเมนู"></app-icon>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            }
+
+            @if(!menus || menus.length === 0) {
+            <!-- Empty state -->
+            <div class="h-80 flex flex-col justify-center items-center text-gray-400">
+                <div class="flex items-center gap-2">
+                    <app-icon name="circle" size="24"></app-icon>
+                    <span>ยังไม่มีรายการ</span>
+                </div>
+            </div>
+            }
+        </app-col>
+    </app-row>
+</div>

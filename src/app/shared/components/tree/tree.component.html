@@ -4,7 +4,7 @@
             [ngClass]="(!node.expanded || !treeNodeTpl) && !parent ? 'border-b border-[#E7EBEE]' : ''">
 
             <!-- row (custom template case) -->
-            <div *ngIf="treeNodeTpl" class="flex items-start py-2 gap-2 relative" [style.marginLeft.px]="level * 16">
+            <div *ngIf="treeNodeTpl" class="flex items-center py-2 gap-2 relative" [style.marginLeft.px]="level * 16">
 
                 <!-- vertical dashed line -->
                 <span *ngIf="!(node.children?.length)"

@@ -185,7 +185,7 @@ export class MainLayout {
         {
           title: 'การจัดการ เมนู',
           icon: 'element-plus',
-          path: '/admin/menus'
+          path: '/admin/menu'
         },
         {
           title: 'การจัดการ ผู้ใช้',

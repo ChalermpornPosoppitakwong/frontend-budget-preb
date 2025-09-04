@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Admin } from './admin';
 import { Roles } from './roles/roles';
 import { RolesEdit } from './roles-edit/roles-edit';
+import { Menu } from './menu/menu';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'roles/create',
     component: RolesEdit
+  },
+  {
+    path: 'menu',
+    component: Menu
   }
 ];
 

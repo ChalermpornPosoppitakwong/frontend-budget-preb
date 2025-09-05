@@ -1,21 +1,45 @@
 <div class="flex h-screen">
-    <div class="flex-1">
-        <div class="mx-auto">
-            <img [src]="'assets/images/ktb_logo.png'" alt="ktb_logo" class="w-56" />
-            <p class="font-bold text-2xl text-blue-400">Budget Prep. Tool</p>
+    <div class="w-1/2">
+        <div class="flex items-center justify-center h-full px-2">
+            <div class="w-1/2">
+                <app-row [gap]="4" class="space-y-4">
+                    <app-col [span]="12" class="m-auto">
+                        <img [src]="'assets/images/ktb_logo.png'" alt="ktb_logo" class="w-56" />
+                    </app-col>
+                    <app-col [span]="12" class="text-center">
+                        <p class="font-bold text-2xl text-blue-400">Budget Prep. Tool</p>
+                    </app-col>
+                </app-row>
+                <app-row [gap]="4" class="mt-8 space-y-2">
+                    <app-col [span]="12">
+                        <app-input placeholder="กรุณาระบุ" label="ชื่อผู้ใช้"></app-input>
+                    </app-col>
+                    <app-col [span]="12">
+                        <app-input [type]="'password'" placeholder="กรุณาระบุ" label="รหัสผ่าน"></app-input>
+                    </app-col>
+                    <app-col [span]="12">
+                        <app-button class="w-full" color="primary">เข้าสู่ระบบ</app-button>
+                    </app-col>
+                </app-row>
 
-            <fieldset class="fieldset">
-                <legend class="fieldset-legend">ค้นหา Menu title</legend>
-                <div class="grid grid-cols-12">
-                    <div class="col-span-12">
-                        <app-input />
-                    </div>
-                </div>
-            </fieldset>
-            <app-input />
-            <a href="#" class="text-blue-400 font-medium hover:underline">คู่มือระบบงบประมาณสำหรับหน่วยงานและสาขา</a>
-            <a href="#" class="text-blue-400 font-medium hover:underline">คู่มือระบบงบประมาณสำหรับสายงาน กลุ่ม
-                เขต</a>
+                <app-row [gap]="4" class="mt-6">
+                    <app-col [span]="12" class="flex flex-col justify-center items-center gap-1">
+                        <a href="#"
+                            class="text-blue-400 font-medium hover:underline">คู่มือระบบงบประมาณสำหรับหน่วยงานและสาขา</a>
+                        <a href="#" class="text-blue-400 font-medium hover:underline">คู่มือระบบงบประมาณสำหรับสายงาน
+                            กลุ่มเขต</a>
+                    </app-col>
+
+                </app-row>
+                <app-row [gap]="4" class="mt-40">
+                    <app-col [span]="12" class="text-center">
+                        <p class="text-xs text-gray-500 font-medium">The use of KTB Web Sites shall be in accordance
+                            with Terms of Use</p>
+                        <p class="text-xs text-gray-500 font-medium">©Copyright 2001 Krung Thai Bank PCL, All Rights
+                            Reserved.</p>
+                    </app-col>
+                </app-row>
+            </div>
         </div>
     </div>
     <div class="flex-1 bg-cover bg-center" style="background-image: url('/assets/images/bg_login.jpg')">

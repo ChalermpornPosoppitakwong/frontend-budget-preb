@@ -4,7 +4,8 @@
             [ngClass]="(!node.expanded || !treeNodeTpl) && !parent ? 'border-b border-[#E7EBEE]' : ''">
 
             <!-- row (custom template case) -->
-            <div *ngIf="treeNodeTpl" class="flex items-center py-2 gap-2 relative" [style.marginLeft.px]="level * 16">
+            <div *ngIf="treeNodeTpl" [class]="`flex items-${align} py-2 gap-2 relative`"
+                [style.marginLeft.px]="level * 16">
 
                 <!-- vertical dashed line -->
                 <span *ngIf="!(node.children?.length)"
@@ -34,7 +35,8 @@
             </div>
 
             <!-- row (default label case) -->
-            <div *ngIf="!treeNodeTpl" class="flex items-center py-2 gap-2 relative" [style.marginLeft.px]="level * 16">
+            <div *ngIf="!treeNodeTpl" [class]="`flex items-${align} py-2 gap-2 relative`"
+                [style.marginLeft.px]="level * 16">
 
                 <!-- vertical dashed line -->
                 <span *ngIf="!(node.children?.length)"
@@ -65,7 +67,7 @@
 
             <!-- recursive (with CSS animation) -->
             <div *ngIf="node.children?.length && node.expanded">
-                <app-tree [data]="node.children ?? []" [parent]="node" [treeNodeTpl]="treeNodeTpl"
+                <app-tree [data]="node.children ?? []" [parent]="node" [treeNodeTpl]="treeNodeTpl" [align]="align"
                     (selectionChange)="selectionChange.emit($event)" [hideCheckbox]="hideCheckbox" [level]="level + 1">
                 </app-tree>
             </div>

@@ -34,7 +34,7 @@
     <app-row>
         <app-col [span]="12">
             @if(menus && menus.length > 0) {
-            <app-tree [data]="menus" [treeNodeTpl]="treeNode" [hideCheckbox]="true"></app-tree>
+            <app-tree [data]="menus" [treeNodeTpl]="treeNode" [align]="'center'" [hideCheckbox]="true"></app-tree>
             <ng-template #treeNode let-node let-parent="parent">
                 <div class="w-full hover:bg-blue-200" [ngClass]="parent ? 'border-b border-[#E7EBEE]' : ''">
                     <div class="flex gap-6 flex-1 cursor-pointer p-2" (mouseenter)="node.hovered = true"

@@ -25,6 +25,7 @@ export class Tree implements OnInit {
   @Input() hideCheckbox: boolean = false;
   @Input() parent?: any;
   @Input() treeNodeTpl?: TemplateRef<any>;
+  @Input() align: 'start' | 'center' | 'end' = 'start';
 
   @Output() selectionChange = new EventEmitter<any>();
 

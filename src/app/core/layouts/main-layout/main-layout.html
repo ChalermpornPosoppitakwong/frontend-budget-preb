@@ -1,6 +1,6 @@
 <div class="min-h-screen flex flex-col md:flex-row bg-gray-100">
     <div [ngClass]="isSidebarCollapsed ? 'w-[60px]' : 'w-[300px]'"
-        class="fixed top-0 left-0 h-screen transition-all duration-300 shadow-md bg-white overflow-visible hidden lg:block">
+        class="fixed top-0 left-0 h-screen transition-all duration-300 shadow-md bg-white overflow-visible hidden lg:flex flex-col">
         <div class="z-50 h-[68px] bg-[#00A6E6]">
             <div class="flex items-center justify-center h-full">
                 <img [src]="isSidebarCollapsed ? 'assets/images/ktb_logo_crop.png' : 'assets/images/ktb_logo_1.png'"
@@ -30,10 +30,12 @@
         </div>
 
         @if(!isSidebarCollapsed) {
-        <ul class="menu menu-md rounded-box w-full p-0">
-            <app-menu-item *ngFor="let menu of menus.submenu" [menu]="menu" [isParent]="true">
-            </app-menu-item>
-        </ul>
+        <div class="flex-1 overflow-y-auto">
+            <ul class="menu menu-md rounded-box w-full p-0">
+                <app-menu-item *ngFor="let menu of menus.submenu" [menu]="menu" [isParent]="true">
+                </app-menu-item>
+            </ul>
+        </div>
         }
         @else {
         <div class="flex flex-col items-center sidebar-menu">

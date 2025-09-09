@@ -23,6 +23,7 @@ export class MainLayout {
       path: '/home',
       icon: 'home',
       submenu: [
+        { title: 'Dashboard ข้อมูลการทำงาน', icon: 'speaker-phone', path: '/#' },
         { title: 'ข่าวประชาสัมพันธ์', icon: 'speaker-phone', path: '/home/announcements' },
       ]
     },
@@ -31,72 +32,32 @@ export class MainLayout {
       path: '/budget-year',
       icon: 'start-year',
       submenu: [
+        { title: 'Download/Upload งบประมาณตั้งต้น', icon: 'report-gantt', path: '/#' },
+        { title: 'รับส่งข้อมูลงบประมาณ', icon: 'report-gantt', path: '/#' },
+        { title: 'Sync ข้อมูล​ค่าใช้จ่ายที่เกิดขึ้นจริง ERP', icon: 'report-gantt', path: '/#' },
         {
-          title: 'รายงานงาน',
+          title: 'บันทึกเสนอขอ/แก้ไขงบประมาณ​',
           icon: 'report-gantt',
-          path: '/budget-year/report-task',
           submenu: [
-            { title: 'รายงานงาน 1', path: '/budget-year/report-task/1' },
-            { title: 'รายงานงาน 2', path: '/budget-year/report-task/2' }
+            { title: 'ค่าใช้จ่าย', path: '/#' },
+            { title: 'ทรัพย์สิน', path: '/#' },
           ]
         },
+        { title: 'สรุปคำของบฯ ของหน่วยงาน', icon: 'report-gantt', path: '/#' },
+        { title: 'สรุปสถานะการส่งคำของบประมาณ', icon: 'report-gantt', path: '/#' },
         {
-          title: 'บันทึกจัดสรร',
-          icon: 'archive-success-outline',
-          path: '/budget-year/allocation',
-          submenu: [
-            { title: 'บันทึกจัดสรร 1', path: '/budget-year/allocation/1' },
-            { title: 'บันทึกจัดสรร 2', path: '/budget-year/allocation/2' }
-          ]
-        },
-        {
-          title: 'จัดการAdhoc',
-          icon: 'task-time',
-          path: '/budget-year/adhoc',
-          submenu: [
-            { title: 'จัดการAdhoc 1', path: '/budget-year/adhoc/1' },
-            { title: 'จัดการAdhoc 2', path: '/budget-year/adhoc/2' }
-          ]
-        },
-        {
-          title: 'การจัดการข้อมูลผู้ใช้งาน',
-          icon: 'user-cog',
-          path: '/budget-year/user-management',
-          submenu: [
-            { title: 'การจัดการข้อมูลผู้ใช้งาน 1', path: '/budget-year/user-management/1' },
-            { title: 'การจัดการข้อมูลผู้ใช้งาน 2', path: '/budget-year/user-management/2' }
-          ]
-        },
-        {
-          title: 'การจัดการข้อมูล',
+          title: 'จัดการสถานะการส่งใบคำขอ',
           icon: 'report-gantt',
-          path: '/data-management',
           submenu: [
-            { title: 'การจัดการหัวบัญชี', path: '/data-management/account-head' },
-            { title: 'จัดการ Mail Template', path: '/data-management/mail-template' },
-            { title: 'จัดการหน่วยงาน [Cost Center Chain]', path: '/data-management/cost-center-chain' },
-            { title: 'การจัดการ User PBD', path: '/data-management/user-pbd' },
-            { title: 'การจัดการงบวงเงิน', path: '/data-management/budget-management' }
+            { title: 'แก้ไขสถานะ', path: '/#' },
           ]
         },
-        {
-          title: 'ข่าวประชาสัมพันธ์',
-          icon: 'speaker-phone',
-          path: '/news',
-          submenu: [
-            { title: 'ข่าวประชาสัมพันธ์ 1', path: '/news/1' },
-            { title: 'ข่าวประชาสัมพันธ์ 2', path: '/news/2' }
-          ]
-        },
-        {
-          title: 'รายงาน',
-          icon: 'bookmark-report',
-          path: '/report',
-          submenu: [
-            { title: 'รายงาน 1', path: '/report/1' },
-            { title: 'รายงาน 2', path: '/report/2' }
-          ]
-        }
+        { title: 'Adhoc ต้นปี', icon: 'report-gantt', path: '/#' },
+        { title: 'รายงาน', icon: 'report-gantt', path: '/#' },
+        { title: 'Generate File ส่งออก', icon: 'report-gantt', path: '/#' },
+        { title: 'Interface งบต้นปี EPBCS', icon: 'report-gantt', path: '/#' },
+        { title: 'รับแบบอนุมัติงบประมาณปีปัจจุบัน', icon: 'report-gantt', path: '/#' },
+        { title: 'บันทึกแก้ไขรายละเอียด Procurement Plan​', icon: 'report-gantt', path: '/#' },
       ]
     },
     {
@@ -105,71 +66,105 @@ export class MainLayout {
       icon: 'coins',
       submenu: [
         {
-          title: 'รายงานงาน',
+          title: 'แบบฟอร์มการขออนุมัติเพิ่มงบประมาณ',
           icon: 'report-gantt',
-          path: '/budget-year/report-task',
           submenu: [
-            { title: 'รายงานงาน 1', path: '/budget-year/report-task/1' },
-            { title: 'รายงานงาน 2', path: '/budget-year/report-task/2' }
+            { title: 'บันทึก', path: '/#' },
+            { title: 'แก้ไข', path: '/#' },
+            { title: 'บันทึกและส่งคำขอ', path: '/#' },
+            { title: 'ยกเลิก', path: '/#' },
+            { title: 'ขอเอกสารเพิ่มเติม', path: '/#' },
+            { title: 'อนุมัติ', path: '/#' },
+            { title: 'ส่งกลับแก้ไข', path: '/#' },
           ]
         },
         {
-          title: 'บันทึกจัดสรร',
-          icon: 'archive-success-outline',
-          path: '/budget-year/allocation',
-          submenu: [
-            { title: 'บันทึกจัดสรร 1', path: '/budget-year/allocation/1' },
-            { title: 'บันทึกจัดสรร 2', path: '/budget-year/allocation/2' }
-          ]
-        },
-        {
-          title: 'จัดการAdhoc',
-          icon: 'task-time',
-          path: '/budget-year/adhoc',
-          submenu: [
-            { title: 'จัดการAdhoc 1', path: '/budget-year/adhoc/1' },
-            { title: 'จัดการAdhoc 2', path: '/budget-year/adhoc/2' }
-          ]
-        },
-        {
-          title: 'การจัดการข้อมูลผู้ใช้งาน',
-          icon: 'user-cog',
-          path: '/budget-year/user-management',
-          submenu: [
-            { title: 'การจัดการข้อมูลผู้ใช้งาน 1', path: '/budget-year/user-management/1' },
-            { title: 'การจัดการข้อมูลผู้ใช้งาน 2', path: '/budget-year/user-management/2' }
-          ]
-        },
-        {
-          title: 'การจัดการข้อมูล',
+          title: 'บันทึกจัดสรร/โอนงบประมาณ​',
           icon: 'report-gantt',
-          path: '/data-management',
           submenu: [
-            { title: 'การจัดการหัวบัญชี', path: '/data-management/account-head' },
-            { title: 'จัดการ Mail Template', path: '/data-management/mail-template' },
-            { title: 'จัดการหน่วยงาน [Cost Center Chain]', path: '/data-management/cost-center-chain' },
-            { title: 'การจัดการ User PBD', path: '/data-management/user-pbd' },
-            { title: 'การจัดการงบวงเงิน', path: '/data-management/budget-management' }
+            { title: 'บันทึก', path: '/#' },
+            { title: 'บันทึกและส่่งต่อ', path: '/#' },
+            { title: 'แก้ไข', path: '/#' },
+            { title: 'Map Group Mail', path: '/#' },
+            { title: 'Approve', path: '/#' },
+            { title: 'Reject', path: '/#' },
+            { title: 'ยกเลิกจัดสรร', path: '/#' },
+            { title: 'Review', path: '/#' },
+            { title: 'Qualify', path: '/#' },
+            { title: 'Delete', path: '/#' },
+            { title: 'Tab หน่วยงานทั้งประเทศ', path: '/#' },
+            { title: 'ส่งคำขอยกเลิก', path: '/#' },
           ]
         },
         {
-          title: 'ข่าวประชาสัมพันธ์',
-          icon: 'speaker-phone',
-          path: '/news',
+          title: 'จัดสรรทรัพย์สิน [FA]',
+          icon: 'report-gantt',
           submenu: [
-            { title: 'ข่าวประชาสัมพันธ์ 1', path: '/news/1' },
-            { title: 'ข่าวประชาสัมพันธ์ 2', path: '/news/2' }
+            { title: 'บันทึก', path: '/#' },
+            { title: 'บันทึกและส่่งต่อ', path: '/#' },
+            { title: 'แก้ไข', path: '/#' },
+            { title: 'Map Group Mail', path: '/#' },
+            { title: 'Approve', path: '/#' },
+            { title: 'Reject', path: '/#' },
+            { title: 'ยกเลิกจัดสรร', path: '/#' },
+            { title: 'Review', path: '/#' },
+            { title: 'Qualify', path: '/#' },
+            { title: 'Delete', path: '/#' },
+            { title: 'Tab หน่วยงานทั้งประเทศ', path: '/#' },
+            { title: 'ส่งคำขอยกเลิก', path: '/#' },
           ]
         },
         {
-          title: 'รายงาน',
-          icon: 'bookmark-report',
-          path: '/report',
+          title: 'โอนค่าใช้จ่าย [GE] และ ทรัพย์สิน [FA]',
+          icon: 'report-gantt',
           submenu: [
-            { title: 'รายงาน 1', path: '/report/1' },
-            { title: 'รายงาน 2', path: '/report/2' }
+            { title: 'บันทึก', path: '/#' },
+            { title: 'บันทึกและส่่งต่อ', path: '/#' },
+            { title: 'แก้ไข', path: '/#' },
+            { title: 'Map Group Mail', path: '/#' },
+            { title: 'Approve', path: '/#' },
+            { title: 'Reject', path: '/#' },
+            { title: 'ยกเลิกจัดสรร', path: '/#' },
+            { title: 'Review', path: '/#' },
+            { title: 'Qualify', path: '/#' },
+            { title: 'Delete', path: '/#' },
+            { title: 'ส่งคำขอยกเลิก', path: '/#' },
           ]
-        }
+        },
+        {
+          title: 'Revision Budget',
+          icon: 'report-gantt',
+          submenu: [
+            { title: 'บันทึก', path: '/#' },
+            { title: 'บันทึกและส่่งต่อ', path: '/#' },
+            { title: 'แก้ไข', path: '/#' },
+            { title: 'Approve', path: '/#' },
+            { title: 'Reject', path: '/#' },
+            { title: 'ยกเลิกจัดสรร/ยกเลิกโอน', path: '/#' },
+            { title: 'Qualify', path: '/#' },
+            { title: 'Delete', path: '/#' },
+          ]
+        },
+        {
+          title: 'รายการงาน',
+          icon: 'report-gantt',
+          submenu: [
+            {
+              title: 'รายการทำงาน', path: '/#'
+            },
+          ]
+        },
+        { title: 'จัดการ Adhoc งบประมาณระหว่างปี', icon: 'report-gantt', path: '/#' },
+        { title: 'ข่าวประชาสัมพันธ์', icon: 'report-gantt', path: '/#' },
+      ]
+    },
+    {
+      title: 'รายงาน',
+      icon: 'gui-management',
+      path: '/reports',
+      submenu: [
+        { title: 'งบประมาณประจำปี', icon: 'report-gantt', path: '/#' },
+        { title: 'งบประมาณระหว่างปี', icon: 'report-gantt', path: '/#' }
       ]
     },
     {
@@ -178,19 +173,54 @@ export class MainLayout {
       icon: 'gui-management',
       submenu: [
         {
-          title: 'การจัดการ Role',
+          title: 'การจัดการข้อมูล',
           icon: 'user-cog',
-          path: '/admin/roles'
+          submenu: [
+            { title: 'การจัดการหัวบัญชี', path: '/#' },
+            { title: 'การจัดการหมวดบัญชี', path: '/#' },
+            { title: 'การจัดการ Account Group', path: '/#' },
+            { title: 'การจัดการ Account Code', path: '/#' },
+            { title: 'การจัดการ Budget Type', path: '/#' },
+            { title: 'การจัดการงบวงเงิน', path: '/#' },
+            { title: 'การจัดการความสัมพันธ์งบวงเงิน', path: '/#' },
+          ]
+        },
+        { title: 'การจัดการมอบอำนาจ', icon: 'user-cog', path: '/#' },
+        { title: 'การจัดการ Mail Template', icon: 'user-cog', path: '/#' },
+        { title: 'การจัดการข่าวประชาสัมพันธ์', icon: 'user-cog', path: '/#' },
+        { title: 'การจัดการหน่วยงาน', icon: 'user-cog', path: '/#' },
+        { title: 'เปิด/ปิดระบบ', icon: 'user-cog', path: '/#' },
+        { title: 'การจัดการข้อมูลทรัพย์สิน', icon: 'user-cog', path: '/#' },
+        {
+          title: 'การจัดการ Template',
+          icon: 'user-cog',
+          submenu: [
+            { title: 'การกำหนด Master Template งบตั้งต้น', path: '/#' },
+            { title: 'สร้าง Template', path: '/#' },
+            { title: 'แก้ไขผังบัญชี', path: '/#' },
+            { title: 'การกำหนด Master Template GE', path: '/#' },
+            { title: 'การกำหนด Master Template Detail', path: '/#' },
+          ]
         },
         {
-          title: 'การจัดการ เมนู',
-          icon: 'element-plus',
-          path: '/admin/menu'
+          title: 'การจัดการผู้ใช้งาน',
+          icon: 'user-cog',
+          submenu: [
+            { title: 'การจัดการ Role', path: '/admin/roles' },
+            { title: 'การจัดการ เมนู', path: '/admin/menu' },
+            { title: 'การจัดการ ผู้ใช้', path: '/admin/users' },
+            { title: 'การจัดการ User PBD', path: '/#' }
+          ]
         },
         {
-          title: 'การจัดการ ผู้ใช้',
-          icon: 'team-member'
-        }
+          title: 'Notification',
+          icon: 'user-cog',
+          submenu: [
+            { title: 'การจัดการ E-mail Template', path: '/#' },
+            { title: 'การจัดการ Notification บนระบบ', path: '/#' }
+          ]
+        },
+        { title: 'การจัดการสาเหตุการส่งกลับแก้ไข', icon: 'user-cog', path: '/#' },
       ]
     }
   ];

@@ -19,6 +19,11 @@ export const routes: Routes = [
         loadChildren: () => import('@modules/cost-center-chain/cost-center-chain-module').then(m => m.CostCenterChainModule)
     },
     {
+        path: 'reports',
+        component: MainLayout,
+        loadChildren: () => import('@modules/reports/reports-module').then(m => m.ReportsModule)
+    },
+    {
         path: 'admin',
         component: MainLayout,
         loadChildren: () => import('@modules/admin/admin-module').then(m => m.AdminModule)

@@ -1,20 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-
-@Component({
-    selector: 'app-budget-year',
-    standalone: true,
-    template: `<h2>งบประมาณประจำปี</h2>`
-})
-export class BudgetYearComponent { }
+import { BudgetYear } from './budget-year';
 
 const routes: Routes = [
-    { path: '', component: BudgetYearComponent }
+    { path: '', component: BudgetYear }
 ];
 
 @NgModule({
-    imports: [CommonModule, RouterModule.forChild(routes), BudgetYearComponent],
+    imports: [CommonModule, RouterModule.forChild(routes)],
 })
 export class BudgetYearModule { }

@@ -24,7 +24,7 @@ export class MainLayout {
       icon: 'home',
       submenu: [
         { title: 'Dashboard ข้อมูลการทำงาน', icon: 'element-plus', path: '/#' },
-        { title: 'ข่าวประชาสัมพันธ์', icon: 'element-plus', path: '/home/announcements' },
+        { title: 'ข่าวประชาสัมพันธ์', icon: 'element-plus', path: '/' },
       ]
     },
     {

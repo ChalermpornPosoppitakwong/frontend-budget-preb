@@ -6,10 +6,6 @@ import { Announcements } from './announcements/announcements';
 const routes: Routes = [
   {
     path: '',
-    component: Home
-  },
-  {
-    path: 'announcements',
     component: Announcements
   }
 ];

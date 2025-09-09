@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 import { ComponentsModule } from '@shared/components/components-module';
 
 @Component({
-  selector: 'app-cost-center-chain',
+  selector: 'app-reports',
   imports: [ComponentsModule],
-  templateUrl: './cost-center-chain.html'
+  templateUrl: './reports.html',
+  styles: ``
 })
-export class CostCenterChain { }
+export class Reports {
+
+}

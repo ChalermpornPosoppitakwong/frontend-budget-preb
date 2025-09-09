@@ -25,7 +25,7 @@ import { Icon } from '../icon/icon';
     }
   `,
   host: {
-    class: 'inline-flex items-center justify-center gap-1 cursor-pointer h-auto select-none transition-colors duration-150 ease-in-out'
+    class: 'focus-visible:ring-0 focus-visible:outline-none inline-flex items-center justify-center gap-1 cursor-pointer h-auto select-none transition-colors duration-150 ease-in-out'
   }
 })
 export class Button {
